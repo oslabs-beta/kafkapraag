@@ -1,6 +1,4 @@
 hello from hank
-<<<<<<< HEAD
 okeyyy from Cat
-=======
 hello from sherry
->>>>>>> da6dc38b37b24bf5ac03b09a2edd3c7674d2fdb4
+hello from richard
