@@ -1,15 +1,13 @@
 "use client"
 import { useState, useEffect } from "react";
 import { VictoryChart, VictoryLine, VictoryTheme } from "victory";
-import BytesPerMinute from "./components/bytesPerMin";
+import BytesPerMinute from "./components/BytesPerSecond";
 
 const Home = () => {
 
-
   return (
-    <div>
-      <div>Home</div>
-     <BytesPerMinute/>
+    <div className="flex justify-center">
+      <BytesPerMinute/>
     </div>
   )
 }
