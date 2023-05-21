@@ -84,7 +84,7 @@ const BytesPerSecond = () => {
   }, []);
 
   return (
-    <div className="h-auto w-[600px]">
+    <div className="h-auto w-[600px] bg-neutral-content rounded-xl">
       <VictoryChart>
         <VictoryLabel
           text={`Bytes in per second: ${Math.round(bytesPerSecond[bytesPerSecond.length - 1].y)}`}

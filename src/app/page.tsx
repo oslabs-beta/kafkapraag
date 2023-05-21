@@ -2,7 +2,7 @@ const Landing = () => {
 
   return (
     <div className="flex justify-center">
-      Landing
+      <p className="text-4xl font-bold">Landing</p>
     </div>
   )
 }
