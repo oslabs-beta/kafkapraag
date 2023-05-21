@@ -11,6 +11,8 @@ export async function GET() {
    // send some of the data to frontend
    // OneMinuteRate, 
    return NextResponse.json({ OneMinuteBytesInRate: byteIn.value.OneMinuteRate});
+   // Testing with Count (byte count) instead of OneMinuteBytesInRate
+   // return NextResponse.json({ Count: byteIn.value.Count});
 }
  
 export async function POST() {
