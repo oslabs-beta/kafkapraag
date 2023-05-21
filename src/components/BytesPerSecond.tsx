@@ -8,12 +8,12 @@ const FETCH_RATE: number = 100;
 // BytesPerSecond graph component
 const BytesPerSecond = () => {
   // const dataPoints = new Array(100).fill({ x: "", y: 0 });
-  const dataPoints: {x: string, y: number/* , count: 0 */}[] = [];
+  const dataPoints: {x: string, y: number, count: number, timestamp: number}[] = [];
   for (let i = 0; i < 100; i++) {
-    dataPoints.push({x: `${i}`, y: 0/* , count: 0  */});
+    dataPoints.push({x: `${i}`, y: 0, count: 0, timestamp: Date.now()});
   }
 
-  const [bytesPerSecond, setbytesPerSecond] = useState<{x: string, y: number/* , count: number */}[]>(dataPoints);
+  const [bytesPerSecond, setbytesPerSecond] = useState<{x: string, y: number, count: number, timestamp: number}[]>(dataPoints);
   const [tickCache, setTickCache] = useState<string[]>(["", ""]);
   // const [domainValues, setDomainValues] = useState<{min: number, max: number}>({ min: 0, max: 0 });
   useEffect(()=>{
@@ -22,7 +22,7 @@ const BytesPerSecond = () => {
     // Fetch data at regular intervals using setInterval
     const interval = setInterval(()=>{
       // Fetch bytes in per second data from backend
-      fetch('/bytes') 
+      fetch('/api/bytes')
       .then(data => data.json())
       .then(data => {
         // Update state with fetched data
@@ -44,15 +44,24 @@ const BytesPerSecond = () => {
           // 1. Slicing off the oldest data point and spreading the rest of the data into a new array 
           // 2. Appending the new data point to the end of the array
           const totalBytes: number = data.Count;
-
           const newState = [...prevBytesPerSecond.slice(1), {
             x: curTime,
-            y: parseFloat(data.OneMinuteBytesInRate.toFixed(2))
-            // Testing with byte count instead of one minute rate
-            // y: ((data.Count - prevBytesPerSecond[prevBytesPerSecond.length - 11].count) + (prevBytesPerSecond[prevBytesPerSecond.length - 6].count - prevBytesPerSecond[prevBytesPerSecond.length - 12].count)) / 2,
-            // count: data.Count
+            y: parseFloat(data.OneMinuteBytesInRate.toFixed(2)),
+            count: totalBytes,
+            timestamp: Date.now()
           }];         
-          console.log(prevBytesPerSecond);
+          
+          // Testing for real-time bps calculations
+          newState[newState.length - 1].y = newState[0].x.length > 3 ? 
+            // Sum up the byte count differences of the current data point vs roughly 1 second ago
+            ((newState[newState.length - 1].count - newState[newState.length - 21].count)
+            // Divide it by the amount of milliseconds that have passed in that timespan
+            / (newState[newState.length - 1].timestamp - newState[newState.length - 21].timestamp)
+              // Multiply by 1000 to get roughly the amount of bytes processed over the last second
+            * 1000) :
+            0 ;
+          console.log(newState);
+
           // Perform tick tracking for VictoryAxis
           // Check current time 
           const timeNow = Date.now();
@@ -60,6 +69,7 @@ const BytesPerSecond = () => {
           if (timeNow - timePrev > 1000 && parseInt(curTime.slice(6, 8)) % 5 === 0) {
             // Reset the interval
             timePrev = timeNow;
+            ''
             // Update the tickCache by removing the oldest tick and adding a new tick
             setTickCache((prevTickCache) => [prevTickCache[1], curTime]);
           }
@@ -77,10 +87,10 @@ const BytesPerSecond = () => {
     <div className="h-auto w-[600px]">
       <VictoryChart>
         <VictoryLabel
-          text="Bytes in per second"
-          x={225}  // Adjust the x-coordinate to position the label horizontally
+          text={`Bytes in per second: ${Math.round(bytesPerSecond[bytesPerSecond.length - 1].y)}`}
+          x={48}  // Adjust the x-coordinate to position the label horizontally
           y={30}   // Adjust the y-coordinate to position the label vertically
-          textAnchor="middle"  // Set textAnchor to "middle" for center alignment
+          // textAnchor="middle"  // Set textAnchor to "middle" for center alignment
         />
         <VictoryLine
           style={{
@@ -88,7 +98,7 @@ const BytesPerSecond = () => {
             parent: { border: "1px solid #ccc"}
           }}
           data={bytesPerSecond}
-          domain={{y: [0, 100]}}
+          domain={{y: [0, 500]}}
           interpolation="basis"
         />
         <VictoryAxis crossAxis

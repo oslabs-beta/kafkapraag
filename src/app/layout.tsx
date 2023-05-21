@@ -1,6 +1,6 @@
 import './globals.css'
-import Nav from './components/Nav';
-import Footer from './components/Footer';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
 export const metadata = {
   title: 'Progue for Kafka',
@@ -12,8 +12,9 @@ export default function RootLayout({ children }: {children: React.ReactNode}) {
     <html lang="en">
       <body>
         <main>
-          <Nav/>
-          {children}
+          <Nav>
+            {children}
+          </Nav>
           <Footer/>
         </main>
       </body>

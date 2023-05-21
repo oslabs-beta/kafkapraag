@@ -9,10 +9,8 @@ export async function GET() {
       // console log the response, access what to send back
    console.log(byteIn)
    // send some of the data to frontend
-   // OneMinuteRate, 
-   return NextResponse.json({ OneMinuteBytesInRate: byteIn.value.OneMinuteRate});
-   // Testing with Count (byte count) instead of OneMinuteBytesInRate
-   // return NextResponse.json({ Count: byteIn.value.Count});
+   // OneMinuteRate, Count
+   return NextResponse.json({ OneMinuteBytesInRate: byteIn.value.OneMinuteRate, Count: byteIn.value.Count});
 }
  
 export async function POST() {

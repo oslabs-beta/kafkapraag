@@ -1,10 +1,10 @@
-const Landing = () => {
+const Login = () => {
 
   return (
     <div className="flex justify-center">
-      Landing
+      <h1>Login</h1>
     </div>
   )
 }
 
-export default Landing;
+export default Login;
