@@ -5,20 +5,9 @@ const kafka = new Kafka({
   brokers: ['localhost:9092']
 })
 
-const producer = kafka.producer()
 const consumer = kafka.consumer({ groupId: 'test-group' })
-const admin = kafka.admin()
 
-const run = async () => {
-  // Producing
-  await producer.connect()
-  await producer.send({
-    topic: 'topic1',
-    messages: [
-      { value: 'Hello KafkaJS user!' },
-    ],
-  })
-
+const runConsumer = async () => {
   // Consuming
   await consumer.connect()
   await consumer.subscribe({ topic: 'topic1', fromBeginning: true })
@@ -32,11 +21,6 @@ const run = async () => {
     },
 
   })
-  await admin.connect()
-  const listTopics = await admin.listTopics();
-  // console.log(listTopics)
-
-  return listTopics;
 }
 
-export default run;
+export default runConsumer;
