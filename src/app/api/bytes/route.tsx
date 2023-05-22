@@ -3,14 +3,14 @@ import { NextResponse } from 'next/server';
 export async function GET() {
 
    // fetch from jolokia localhost 8787
-   const response = await fetch('http://localhost:8778/jolokia/read/kafka.server:type=BrokerTopicMetrics,name=TotalProduceRequestsPerSec');
+   const response = await fetch('http://127.0.0.1:8778/jolokia/read/kafka.server:type=BrokerTopicMetrics,name=BytesInPerSec');
    // parse the response
-   let produceRequestRate = await response.json();
+   let byteIn = await response.json();
       // console log the response, access what to send back
-   console.log(produceRequestRate.value.OneMinuteRate)
+   console.log(byteIn)
    // send some of the data to frontend
-   // OneMinuteRate, 
-   return NextResponse.json({ OneMinuteProduceRequestRate: produceRequestRate.value.OneMinuteRate});
+   // OneMinuteRate, Count
+   return NextResponse.json({ OneMinuteBytesInRate: byteIn.value.OneMinuteRate, Count: byteIn.value.Count});
 }
  
 export async function POST() {
