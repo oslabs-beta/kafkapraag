@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-const run = require('../api/kafkajs')
+const run = require('@api/kafkajs.ts')
 
 export async function GET() {
 

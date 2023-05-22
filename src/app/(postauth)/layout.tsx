@@ -1,7 +1,6 @@
-import './globals.css'
-import Nav from '../components/Nav';
-import Footer from '../components/Footer';
-import { useState } from 'react';
+import '@app/globals.css'
+import Nav from '@components/Nav';
+import Footer from '@components/Footer';
 
 export const metadata = {
   title: 'kafkaPRAAG',
