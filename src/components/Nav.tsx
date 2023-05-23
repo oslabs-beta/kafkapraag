@@ -70,6 +70,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
               <li><Link href="/login">Login</Link></li>
               <li><Link href="/signup">Signup</Link></li>
               <li><Link href="/metrics">Metrics</Link></li>
+              <li><Link href="/producermetrics">Producer Metrics</Link></li>
             </ul>
           </div>
         </div>
