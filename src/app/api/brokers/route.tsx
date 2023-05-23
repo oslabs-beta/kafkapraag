@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function GET() {
 
    // fetch from jolokia localhost 8787
-   const response = await fetch('http://localhost:8778/jolokia/read/kafka.server:type=BrokerTopicMetrics,name=TotalProduceRequestsPerSec');
+   const response = await fetch('http://127.0.0.1:8778/jolokia/read/kafka.server:type=BrokerTopicMetrics,name=TotalProduceRequestsPerSec');
    // parse the response
    let produceRequestRate = await response.json();
    // console log the response, access what to send back
