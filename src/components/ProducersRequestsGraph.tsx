@@ -22,7 +22,7 @@ const ProducersRate = () => {
     // Fetch data at regular intervals using setInterval
     const interval = setInterval(()=>{
       // Fetch bytes in per second data from backend
-      fetch('/api/brokers')
+      fetch('/api/brokers', { cache: 'no-store' })
       .then(data => data.json())
       .then(data => {
         // Update state with fetched data
@@ -86,7 +86,7 @@ const ProducersRate = () => {
             parent: { border: "1px solid #ccc"}
           }}
           data={ProducersRate}
-          domain={{y: [-1, 1]}}
+          // domain={{y: [0, 1]}}
           interpolation="basis"
         />
         <VictoryAxis crossAxis

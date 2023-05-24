@@ -73,6 +73,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
               <li><Link href="/brokers">Broker Metrics</Link></li>
               <li><Link href="/producers">Producer Metrics</Link></li>
               <li><Link href="/topics">Topic Metrics</Link></li>
+              <li><Link href="/testing">Cluster Testing</Link></li>
             </ul>
           </div>
         </div>
