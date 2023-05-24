@@ -1,5 +1,5 @@
 "use client"
-import BytesPerSecond from "@components/BytesPerSecond";
+import BytesPerSecond from "@components/BrokersBytesInGraph";
 
 const Metrics = () => {
 

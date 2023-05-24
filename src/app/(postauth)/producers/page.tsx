@@ -1,5 +1,5 @@
 "use client"
-import ProducersRequestRateGraph from "@components/ProducersRequestRateGraph";
+import ProducersRequestRateGraph from "@components/ProducersRequestsGraph";
 
 const ProducersRequestRate = () => {
 
