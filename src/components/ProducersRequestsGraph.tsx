@@ -86,7 +86,7 @@ const ProducersRate = () => {
             parent: { border: "1px solid #ccc"}
           }}
           data={ProducersRate}
-          domain={{y: [-1, 1]}}
+          domain={{y: [0, 1]}}
           interpolation="basis"
         />
         <VictoryAxis crossAxis

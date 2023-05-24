@@ -5,11 +5,15 @@ class DummyProducer {
   private clientId: string;
   private brokers: string[];
   private producer: Producer;
+  private interval: number;
+  private activeInterval: NodeJS.Timeout | null;
 
-  constructor(clientId: string, brokers: string[]) {
+  constructor(clientId: string, brokers: string[], interval: number) {
     this.clientId = clientId;
     this.brokers = brokers;
     this.producer = this.createProducer();
+    this.interval = interval;
+    this.activeInterval = null;
   }
 
   private createProducer(): Producer {
@@ -32,20 +36,23 @@ class DummyProducer {
   }
 
   public async sendMessage(topic: string, messages: Array<Message>) {
-    try {
-      // Send a message to a topic
-      await this.producer.send({
-        topic,
-        messages
-      })
-    } catch (error) {
-      console.log('Error sending message', error)
-    }
+    this.activeInterval = setInterval(async (): Promise<void> => {
+      try {
+        // Start sending messages to a topic
+        await this.producer.send({
+          topic,
+          messages
+        })
+      } catch (error) {
+        console.log('Error sending message', error)
+      }
+    }, this.interval);
   }
 
   public async stop() {
     try {
       // Disconnect the producer
+      if (this.interval !== null) clearInterval(this.activeInterval || 0);
       await this.producer.disconnect();
     } catch (error) {
       console.log('Error disconnecting producer', error);
@@ -61,13 +68,13 @@ export default class ProducerList {
     this.producers = {};
   }
 
-  public async startProducer(producerName: string, clientId: string, brokers: string[]): Promise<void> {
+  public async startProducer(producerName: string, interval: number, clientId: string, brokers: string[]): Promise<void> {
     try {
       // If user entered a name for a producer that already exists
       if (Object.hasOwn(this.producers, producerName)) {
         throw new Error("Producer name already exists, choose new producer name.");
       }
-      const newProducer = new DummyProducer(clientId, brokers);
+      const newProducer = new DummyProducer(clientId, brokers, interval);
       await newProducer.start();
       // Add producer to producers object
       this.producers[producerName] = newProducer;
@@ -76,7 +83,7 @@ export default class ProducerList {
     }
   }
 
-  public async sendMessage(producerName: string, topic: string, messages: Array<Message>): Promise<void> {
+  public async sendMessage(producerName: string, topic: string, messages: Array<Message> = [{ value: `Hello, this is a message from ${producerName}`}]): Promise<void> {
     try {
       // Check if producer exists, if not throw error
       if (!Object.hasOwn(this.producers, producerName)) {

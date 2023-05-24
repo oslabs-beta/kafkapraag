@@ -11,10 +11,13 @@ export async function POST(req: Request, res: Response) {
   console.log("Hit producer POST route");
   const data = await req.json();
   console.log(data);
-  const { producerName, clientId, brokers} = data;
-  // producerName: string, clientId: string, brokers: string[]
+  const { producerName, clientId, brokers, message} = data;
+  const interval = 1000 / message.rate;
+  // Test topic
+  const topic = "topic1";
 
-  await producers.startProducer(producerName, clientId, brokers);
+  await producers.startProducer(producerName, interval, clientId, brokers);
+  await producers.sendMessage(producerName, topic);
   
   return NextResponse.json({ message: "Producer started." });
 }

@@ -60,7 +60,7 @@ const BrokersBytesInGraph = () => {
               // Multiply by 1000 to get roughly the amount of bytes processed over the last second
             * 1000) :
             0 ;
-          console.log(newState);
+          console.log(data.Count);
 
           // Perform tick tracking for VictoryAxis
           // Check current time 
