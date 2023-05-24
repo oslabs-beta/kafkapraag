@@ -22,7 +22,7 @@ const ProducersRate = () => {
     // Fetch data at regular intervals using setInterval
     const interval = setInterval(()=>{
       // Fetch bytes in per second data from backend
-      fetch('/api/brokers')
+      fetch('/api/brokers', { cache: 'no-store' })
       .then(data => data.json())
       .then(data => {
         // Update state with fetched data

@@ -22,7 +22,7 @@ const BrokersBytesInGraph = () => {
     // Fetch data at regular intervals using setInterval
     const interval = setInterval(()=>{
       // Fetch bytes in per second data from backend
-      fetch('/api/bytes')
+      fetch('/api/bytes', { cache: 'no-store' })
       .then(data => data.json())
       .then(data => {
         // Update state with fetched data
