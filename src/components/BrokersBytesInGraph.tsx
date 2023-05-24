@@ -98,7 +98,7 @@ const BrokersBytesInGraph = () => {
             parent: { border: "1px solid #ccc"}
           }}
           data={bytesPerSecond}
-          domain={{y: [0, 500]}}
+          // domain={{y: [0, 500]}}
           interpolation="basis"
         />
         <VictoryAxis crossAxis
