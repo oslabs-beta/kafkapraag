@@ -69,8 +69,10 @@ const Nav: React.FC<NavProps> = ({ children }) => {
               {/* <!-- Sidebar content here --> */}
               <li><Link href="/login">Login</Link></li>
               <li><Link href="/signup">Signup</Link></li>
-              <li><Link href="/metrics">Metrics</Link></li>
-              <li><Link href="/producermetrics">Producer Metrics</Link></li>
+              <li><Link href="/overall">Overall Metrics</Link></li>
+              <li><Link href="/brokers">Broker Metrics</Link></li>
+              <li><Link href="/producers">Producer Metrics</Link></li>
+              <li><Link href="/topics">Topic Metrics</Link></li>
             </ul>
           </div>
         </div>

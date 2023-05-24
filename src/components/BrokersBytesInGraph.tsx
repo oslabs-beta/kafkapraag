@@ -6,7 +6,7 @@ import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from "victory";
 const FETCH_RATE: number = 100;
 
 // BytesPerSecond graph component
-const BytesPerSecond = () => {
+const BrokersBytesInGraph = () => {
   // const dataPoints = new Array(100).fill({ x: "", y: 0 });
   const dataPoints: {x: string, y: number, count: number, timestamp: number}[] = [];
   for (let i = 0; i < 100; i++) {
@@ -123,4 +123,4 @@ const BytesPerSecond = () => {
   )
 }
 
-export default BytesPerSecond;
+export default BrokersBytesInGraph;
