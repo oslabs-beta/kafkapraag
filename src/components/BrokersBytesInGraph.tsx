@@ -84,7 +84,7 @@ const BrokersBytesInGraph = () => {
   }, []);
 
   return (
-    <div className="h-auto w-[600px] bg-neutral-content rounded-3xl">
+    <div className="h-auto w-[750px] bg-neutral-content rounded-3xl p-10">
       <VictoryChart>
         <VictoryLabel
           text={`Bytes in per second: ${Math.round(bytesPerSecond[bytesPerSecond.length - 1].y)}`}
@@ -98,7 +98,7 @@ const BrokersBytesInGraph = () => {
             parent: { border: "1px solid #ccc"}
           }}
           data={bytesPerSecond}
-          // domain={{y: [0, 500]}}
+          domain={{y: [0, 2000]}}
           interpolation="basis"
         />
         <VictoryAxis crossAxis
