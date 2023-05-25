@@ -9,6 +9,7 @@ export const authOptions = {
     GoogleProvider({
       clientId: GoogleID,
       clientSecret: GoogleSecret
+      
     })
   ],
   // callbacks: {

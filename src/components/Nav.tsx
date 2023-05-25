@@ -3,12 +3,12 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { getProviders, signIn, signOut} from 'next-auth/react'
-
 type NavProps = {
   children: React.ReactNode
 }
 
 const Nav: React.FC<NavProps> = ({ children }) => {
+
   const [theme, setTheme] = useState("garden");
 
   const swapTheme = (): void => {
@@ -69,8 +69,10 @@ const Nav: React.FC<NavProps> = ({ children }) => {
             </div>
             <ul className="menu p-4 flex flex-col font-semibold text-lg">
               {/* <!-- Sidebar content here --> */}
-              <li><button onClick={(e)=> {
-                signIn(undefined, {callbackUrl: 'http://localhost:3000/topics'})
+              <li><button onClick={async (e)=> {
+
+                const prov =  await getProviders();
+                signIn(prov, {callbackUrl: 'http://localhost:3000/testing'})
               }}>Login</button></li>
               <li><button onClick={(e)=> {
                 signOut({callbackUrl: 'http://localhost:3000'})
