@@ -11,8 +11,12 @@ const Topics = () => {
             fetch('/api/topics')
             .then (data => data.json())
             .then (data => {
-                console.log('data is', data);
-                setTopic(data.topics.length)
+                // console.log('data is', data);
+
+                //filter out '__consumer_offsets topic' for each consumer
+                const filteredData = data.topics.filter((topic: string) => topic !== '__consumer_offsets');
+                // console.log('filteredData: ', filteredData)
+                setTopic(filteredData.length)
             })
         })
         return () => {clearInterval(interval)};

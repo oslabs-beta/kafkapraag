@@ -75,7 +75,7 @@ const ProducersRate = () => {
     <div className="h-auto w-[600px] bg-neutral-content rounded-3xl">
       <VictoryChart>
         <VictoryLabel
-          text={`Bytes in per second: ${Math.round(ProducersRate[ProducersRate.length - 1].y)}`}
+          text={`Producer Requests per Minute: ${Math.round(ProducersRate[ProducersRate.length - 1].y)}`}
           x={48}  // Adjust the x-coordinate to position the label horizontally
           y={30}   // Adjust the y-coordinate to position the label vertically
           // textAnchor="middle"  // Set textAnchor to "middle" for center alignment
