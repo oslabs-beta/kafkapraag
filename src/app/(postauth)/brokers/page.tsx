@@ -1,7 +1,7 @@
 "use client"
 import BytesPerSecond from "@components/BrokersBytesInGraph";
 
-const Metrics = () => {
+const Brokers = () => {
 
   return (
     <div className="flex-column">
@@ -14,4 +14,4 @@ const Metrics = () => {
   )
 }
 
-export default Metrics;
+export default Brokers;
