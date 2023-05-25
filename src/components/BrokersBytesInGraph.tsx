@@ -22,7 +22,7 @@ const BrokersBytesInGraph = () => {
     // Fetch data at regular intervals using setInterval
     const interval = setInterval(()=>{
       // Fetch bytes in per second data from backend
-      fetch('/api/bytes')
+      fetch('/api/bytes', { cache: 'no-store' })
       .then(data => data.json())
       .then(data => {
         // Update state with fetched data
@@ -60,7 +60,7 @@ const BrokersBytesInGraph = () => {
               // Multiply by 1000 to get roughly the amount of bytes processed over the last second
             * 1000) :
             0 ;
-          console.log(newState);
+          console.log(data.Count);
 
           // Perform tick tracking for VictoryAxis
           // Check current time 
@@ -98,7 +98,7 @@ const BrokersBytesInGraph = () => {
             parent: { border: "1px solid #ccc"}
           }}
           data={bytesPerSecond}
-          domain={{y: [0, 500]}}
+          // domain={{y: [0, 500]}}
           interpolation="basis"
         />
         <VictoryAxis crossAxis

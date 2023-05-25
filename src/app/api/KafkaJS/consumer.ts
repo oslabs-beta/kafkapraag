@@ -1,26 +1,63 @@
-import { Kafka } from 'kafkajs'
+import { Kafka, Consumer } from 'kafkajs'
 
-const kafka = new Kafka({
-  clientId: 'my-app',
-  brokers: ['localhost:9092']
-})
-
-const consumer = kafka.consumer({ groupId: 'test-group' })
-
-const runConsumer = async () => {
-  // Consuming
-  await consumer.connect()
-  await consumer.subscribe({ topic: 'topic1', fromBeginning: true })
-  await consumer.run({
-    eachMessage: async ({ topic, partition, message }) => {
-      console.log({
-        partition,
-        offset: message.offset,
-        value: message.value.toString(),
-      })
-    },
-
-  })
+type Settings = {
+  clientId: string,
+  brokers: string[],
+  groupId: string,
+  topic: string,
+  fromBeginning?: boolean
 }
 
-export default runConsumer;
+type startConsumerReturn = {
+  startConsumer: ({ clientId, brokers, groupId, topic, fromBeginning = false }: Settings) => Promise<void>,
+  stopConsumer: () => void
+}
+
+/*  
+const settings = {
+  clientId: "my-app",
+  brokers: ["127.0.0.1:9092"],
+  groupId: "test-group",
+  topic: "topic1",
+  fromBeginning: true
+}
+*/
+
+const NewConsumer = (): startConsumerReturn => {
+  let consumer: null | Consumer = null;
+  
+  const startConsumer = async ({ clientId, brokers, groupId, topic, fromBeginning = false }: Settings): Promise<void> => {
+    // Connect to Kafka cluster
+    const kafka = new Kafka({
+      clientId,
+      brokers
+    });
+    // Create a new consumer
+    consumer = kafka.consumer({ groupId });
+    // Connect the newly created consumer
+    await consumer.connect();
+    /* Subscribe to a particular topic. If fromBeginning is true, display messages 
+    from beginning of log. Else only display messages after current time */
+    await consumer.subscribe({ topic, fromBeginning })
+    // Perform the following action for each message consumed from topic
+    await consumer.run({
+      eachMessage: async ({ topic, partition, message }) => {
+        console.log({
+          topic, 
+          partition,
+          offset: message.offset,
+          value: message.value.toString(),
+        })
+      },
+    })
+  }
+
+  const stopConsumer: () => void = async () => { 
+    await consumer?.disconnect();
+  };
+
+  return { startConsumer, stopConsumer };
+}
+
+
+export default NewConsumer;

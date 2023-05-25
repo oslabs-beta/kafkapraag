@@ -8,7 +8,7 @@ const Topics = () => {
 
     useEffect(() => {
         const interval = setInterval(()=>{
-            fetch('/api/topics')
+            fetch('/api/topics', { cache: 'no-store' })
             .then (data => data.json())
             .then (data => {
                 // console.log('data is', data);
