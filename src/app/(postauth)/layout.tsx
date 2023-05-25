@@ -16,8 +16,8 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en" data-theme="garden">
       <body>
-        <main>
-          <Nav>
+        <main className="drop-shadow-lg">
+          <Nav >
             {children}
           </Nav>
           <Footer/>
