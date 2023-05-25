@@ -11,11 +11,11 @@ export const authOptions = {
       clientSecret: GoogleSecret
     })
   ],
-  callbacks: {
-    redirect: async () => {
-      return Promise.resolve('http://localHost:3000/testing')
-    }
-  }
+  // callbacks: {
+  //   redirect: async () => {
+  //     return Promise.resolve('http://localHost:3000/testing')
+  //   }
+  // }
 }
 
 const handler = NextAuth(authOptions)

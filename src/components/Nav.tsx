@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import { getProviders, signIn, signOut} from 'next-auth/react'
+
 type NavProps = {
   children: React.ReactNode
 }
@@ -67,7 +69,14 @@ const Nav: React.FC<NavProps> = ({ children }) => {
             </div>
             <ul className="menu p-4 flex flex-col font-semibold text-lg">
               {/* <!-- Sidebar content here --> */}
-              <li><Link href="/api/auth/signin">Login</Link></li>
+              <li><button onClick={(e)=> {
+                signIn(undefined, {callbackUrl: 'http://localhost:3000/topics'})
+              }}>Login</button></li>
+              <li><button onClick={(e)=> {
+                signOut({callbackUrl: 'http://localhost:3000'})
+                console.log(e)
+                
+                }}>Logout</button></li>
               {/* <li><Link href="/signup">Signup</Link></li> */}
               <li><Link href="/overall">Overall Metrics</Link></li>
               <li><Link href="/brokers">Broker Metrics</Link></li>
