@@ -11,8 +11,8 @@ const Landing = () => {
           </div>
           <p className="py-6 text-lg max-w-xs md:text-xl md:max-w-lg">Your Apache Kafka health and performance visualizer.</p>
           <div className="flex flex-col items-center md:inline">
-            <Link href="/login" className="btn btn-primary px-10 m-2 w-[200px]">Login</Link>
-            <Link href="/signup" className="btn btn-primary px-10 m-2 w-[200px]">Signup</Link>
+            <Link href="api/auth/signin" className="btn btn-primary px-10 m-2 w-[200px]">Login</Link>
+            {/* <Link href="/signup" className="btn btn-primary px-10 m-2 w-[200px]">Signup</Link> */}
           </div>
         </div>
       </div>

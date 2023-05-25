@@ -67,8 +67,8 @@ const Nav: React.FC<NavProps> = ({ children }) => {
             </div>
             <ul className="menu p-4 flex flex-col font-semibold text-lg">
               {/* <!-- Sidebar content here --> */}
-              <li><Link href="/login">Login</Link></li>
-              <li><Link href="/signup">Signup</Link></li>
+              <li><Link href="/api/auth/signin">Login</Link></li>
+              {/* <li><Link href="/signup">Signup</Link></li> */}
               <li><Link href="/overall">Overall Metrics</Link></li>
               <li><Link href="/brokers">Broker Metrics</Link></li>
               <li><Link href="/producers">Producer Metrics</Link></li>
