@@ -21,7 +21,7 @@ services:
     ports:
       - "8778:8778"
     environment:
-      - JOLOKIA_AGENT_OPTS=port=8778,host=kafka,discoveryEnabled=false
+      - JOLOKIA_AGENT_OPTS=port=8778,host=0.0.0.0,discoveryEnabled=false
     networks:
       - kafka-network
     depends_on:
