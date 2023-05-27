@@ -1,5 +1,8 @@
 import '@app/globals.css'
 import Footer from '@components/Footer';
+import Provider from '@components/Provider';
+import { SessionProvider } from "next-auth/react"
+
 
 export const metadata = {
   title: 'kafkaPRAAG',
@@ -13,6 +16,7 @@ type RootLayoutProps = {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
 
   return (
+    <Provider>
     <html lang="en" data-theme="garden">
       <body>
         <main>
@@ -21,6 +25,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
         </main>
       </body>
     </html>
+    </Provider>
   )
 }
 
