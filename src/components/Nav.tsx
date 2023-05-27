@@ -72,7 +72,8 @@ const Nav: React.FC<NavProps> = ({ children }) => {
               <li><button onClick={async (e)=> {
 
                 const prov =  await getProviders();
-                signIn(prov, {callbackUrl: 'http://localhost:3000/testing'})
+                console.log('prov:',prov)
+                // signIn(prov, {callbackUrl: 'http://localhost:3000/testing'})
               }}>Login</button></li>
               <li><button onClick={(e)=> {
                 signOut({callbackUrl: 'http://localhost:3000'})

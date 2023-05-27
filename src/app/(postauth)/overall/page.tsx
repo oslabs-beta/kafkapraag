@@ -4,9 +4,7 @@ import BytesPerSecond from "@components/BrokersBytesInGraph";
 import Topics from "@components/Topics";
 import TopicsNames from "@components/TopicsNames";
 
-
 const OverallMetrics = () => {
-
   return (
     <div className="flex-column">
       <p className="text-center text-4xl font-bold">Producers Request Rate</p>
