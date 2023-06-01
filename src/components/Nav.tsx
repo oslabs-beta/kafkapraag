@@ -13,7 +13,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
 
   const swapTheme = (): void => {
     setTheme((prevTheme) => {
-      const newTheme = prevTheme === "garden" ? "dark" : "garden";
+      const newTheme = prevTheme === "mytheme" ? "dark" : "mytheme";
       const html = document.querySelector('html');
       html?.setAttribute("data-theme", newTheme);
       return newTheme;
