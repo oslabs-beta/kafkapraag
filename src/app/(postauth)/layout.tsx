@@ -1,6 +1,5 @@
 import '@app/globals.css'
 import Nav from '@components/Nav';
-import Footer from '@components/Footer';
 
 export const metadata = {
   title: 'kafkaPRAAG',
@@ -14,16 +13,9 @@ type RootLayoutProps = {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
 
   return (
-    <html lang="en" data-theme="garden">
-      <body>
-        <main>
-          <Nav>
+          <Nav >
             {children}
           </Nav>
-          <Footer/>
-        </main>
-      </body>
-    </html>
   )
 }
 

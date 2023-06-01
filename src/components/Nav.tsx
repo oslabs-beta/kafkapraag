@@ -2,11 +2,13 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import { getProviders, signIn, signOut} from 'next-auth/react'
 type NavProps = {
   children: React.ReactNode
 }
 
 const Nav: React.FC<NavProps> = ({ children }) => {
+
   const [theme, setTheme] = useState("garden");
 
   const swapTheme = (): void => {
@@ -67,12 +69,23 @@ const Nav: React.FC<NavProps> = ({ children }) => {
             </div>
             <ul className="menu p-4 flex flex-col font-semibold text-lg">
               {/* <!-- Sidebar content here --> */}
-              <li><Link href="/login">Login</Link></li>
-              <li><Link href="/signup">Signup</Link></li>
+              <li><button onClick={async (e)=> {
+
+                const prov =  await getProviders();
+                console.log('prov:',prov)
+                // signIn(prov, {callbackUrl: 'http://localhost:3000/testing'})
+              }}>Login</button></li>
+              <li><button onClick={(e)=> {
+                signOut({callbackUrl: 'http://localhost:3000'})
+                console.log(e)
+                
+                }}>Logout</button></li>
+              {/* <li><Link href="/signup">Signup</Link></li> */}
               <li><Link href="/overall">Overall Metrics</Link></li>
               <li><Link href="/brokers">Broker Metrics</Link></li>
               <li><Link href="/producers">Producer Metrics</Link></li>
               <li><Link href="/topics">Topic Metrics</Link></li>
+              <li><Link href="/topicsnames">Topic Names</Link></li>
               <li><Link href="/testing">Cluster Testing</Link></li>
             </ul>
           </div>
