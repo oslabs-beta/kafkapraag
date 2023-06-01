@@ -2,6 +2,10 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import Image from 'next/image';
+import logo from "src/assets/kafkaPRAAG-logo-transparent.png"
+
+
 import { getProviders, signIn, signOut} from 'next-auth/react'
 type NavProps = {
   children: React.ReactNode
@@ -35,7 +39,12 @@ const Nav: React.FC<NavProps> = ({ children }) => {
             <div className="flex-1">
               <Link className="flex-0 btn btn-ghost px-2 lg:hidden" href="/">
                 <div className="font-title text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
-                  <span className="lowercase">kafka<span className="text-base-content uppercase">PRAAG</span></span> 
+                <Image
+      src={logo}
+      alt="kafkaPRAAG logo"
+      width={90}
+      // height={70}
+    />
                 </div>
               </Link>
             </div>
@@ -59,34 +68,32 @@ const Nav: React.FC<NavProps> = ({ children }) => {
         </div> 
         <div className="drawer-side">
           <label htmlFor="my-drawer-3" className="drawer-overlay"></label> 
-          <div className="bg-base-200 w-80">
-            <div className="z-20 bg-base-200 bg-opacity-90 backdrop-blur sticky top-0 items-center gap-2 px-4 py-2 hidden lg:flex ">
+          <div className="w-80">
+            <div className="z-20 sticky top-0 items-center gap-2 px-4 py-2 hidden lg:flex ">
               <Link className="flex-0 btn btn-ghost px-2" href="/">
                 <div className="font-title text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
-                  <span className="lowercase">kafka<span className="text-base-content uppercase">PRAAG</span></span> 
+                <Image
+      src={logo}
+      alt="kafkaPRAAG logo"
+      width={250}
+      height={250}
+    />
                 </div>
               </Link>
             </div>
-            <ul className="menu p-4 flex flex-col font-semibold text-lg">
+            <ul className="menu p-4 flex flex-col font-light text-lg">
               {/* <!-- Sidebar content here --> */}
-              <li><button onClick={async (e)=> {
-
-                const prov =  await getProviders();
-                console.log('prov:',prov)
-                // signIn(prov, {callbackUrl: 'http://localhost:3000/testing'})
-              }}>Login</button></li>
-              <li><button onClick={(e)=> {
-                signOut({callbackUrl: 'http://localhost:3000'})
-                console.log(e)
-                
-                }}>Logout</button></li>
-              {/* <li><Link href="/signup">Signup</Link></li> */}
-              <li><Link href="/overall">Overall Metrics</Link></li>
+              <li><Link className="font-medium text-lg" href="/overall">Overall Metrics</Link></li>
               <li><Link href="/brokers">Broker Metrics</Link></li>
               <li><Link href="/producers">Producer Metrics</Link></li>
               <li><Link href="/topics">Topic Metrics</Link></li>
               <li><Link href="/topicsnames">Topic Names</Link></li>
               <li><Link href="/testing">Cluster Testing</Link></li>
+              <li className="mt-40 sm:mt-64 text-slate-500 font-light"><button onClick={(e)=> {
+                signOut({callbackUrl: 'http://localhost:3000'})
+                console.log(e)
+                
+                }}>Logout</button></li>
             </ul>
           </div>
         </div>
