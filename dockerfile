@@ -2,10 +2,10 @@
 FROM node:20.1.0
 
 # Set the working directory inside the container
-WORKDIR /
+WORKDIR /src/app
 
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+COPY package*.json /src/app
 
 # Install the application dependencies
 RUN npm install
