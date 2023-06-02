@@ -8,7 +8,7 @@ const ProducerTesting = () => {
   const [ producerName, setProducerName ] = useState("");
   const [ messagesPerSecond, setMessagesPerSecond ] = useState("");
   // Currently using default values for testing, need dynamic values
-  const [ brokers, setBrokers ] = useState(["127.0.0.1:9092"]);
+  const [ brokers, setBrokers ] = useState(["kafka:9092"]);
   const [ clientId, setClientId ] = useState("kafkajs-producer1");
 
 
