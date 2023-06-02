@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from "victory";
 
 // Set constant for how often to fetch data for populating graph
-const FETCH_RATE: number = 100;
+const FETCH_RATE: number = 2000;
 
 // BytesPerSecond graph component
 const BrokersBytesInGraph = () => {
@@ -84,7 +84,7 @@ const BrokersBytesInGraph = () => {
   }, []);
 
   return (
-    <div className="h-auto w-[750px] bg-neutral-content rounded-3xl p-10">
+    <div className="h-auto w-[750px] p-10">
       <VictoryChart>
         <VictoryLabel
           text={`Bytes in per second: ${Math.round(bytesPerSecond[bytesPerSecond.length - 1].y)}`}

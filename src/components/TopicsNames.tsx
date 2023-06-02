@@ -42,7 +42,7 @@ const TopicsNames = () => {
                 //consolelog doesnt reflect since it's async?
                 // console.log('tabled', tabled)
             })
-        },5000)
+        },1000)
         return () => {clearInterval(interval)};
     }, []);
     return(
@@ -51,8 +51,8 @@ const TopicsNames = () => {
                 {/* head */}
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th>Name</th>
+                        <th className="bg-transparent font-light text-accent">Topic</th>
+                        <th className="bg-transparent font-light text-accent">Name</th>
                     </tr>
                 </thead>
                 <tbody>

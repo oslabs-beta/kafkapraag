@@ -8,7 +8,7 @@ const ProducerTesting = () => {
   const [ producerName, setProducerName ] = useState("");
   const [ messagesPerSecond, setMessagesPerSecond ] = useState("");
   // Currently using default values for testing, need dynamic values
-  const [ brokers, setBrokers ] = useState(["kafka:9092"]);
+  const [ brokers, setBrokers ] = useState(["localhost:9092"]);
   const [ clientId, setClientId ] = useState("kafkajs-producer1");
 
 
@@ -119,19 +119,19 @@ const ProducerTesting = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <p className="text-2xl font-bold mb-7">Producer Testing</p>
+      <p className="text-2xl font-extralight mb-7">Generate producers:</p>
       <div className="flex flex-col md:flex-row md:justify-end items-center w-[600px] md:w-[800px]">
-        <input value={producerName} onChange={handleProducerNameInputChange} type="text" placeholder="Producer name" className="input input-bordered w-[200px] md:w-[300px] m-2" />
-        <input value={messagesPerSecond} onChange={handleMessagesPerSecondInputChange} type="number" placeholder="Messages/second" className="input input-bordered w-[200px] md:w-[300px] m-2" />
-        <button onClick={handleStartButtonClick} className="btn btn-primary m-2 w-[200px]">Start Producer</button>
+        <input value={producerName} onChange={handleProducerNameInputChange} type="text" placeholder="Producer name" className="placeholder:italic input m-2" />
+        <input value={messagesPerSecond} onChange={handleMessagesPerSecondInputChange} type="number" placeholder="Messages/second" className="placeholder:italic input m-2" />
+        <button onClick={handleStartButtonClick} className="btn btn-outline btn-primary m-2 w-[200px]">Start Producer</button>
       </div>
       <div className="my-5 md:hidden"></div>
       <div className="flex flex-col md:flex-row justify-end items-center w-[600px] md:w-[800px]">
-        <select value={dropDown} onChange={handleProducerSelect} className="select select-bordered w-[200px] md:w-[276px] m-2">
+        <select value={dropDown} onChange={handleProducerSelect} className="select m-2">
           <option value="DEFAULT" disabled>Select a producer:</option>
           {producersList}
         </select>
-        <button onClick={handleStopButtonClick} className="btn btn-primary bg-red-700 hover:bg-red-800 text-red-100 m-2 w-[200px]">Stop Producer</button>
+        <button onClick={handleStopButtonClick} className="btn btn-outline btn-error hover:bg-red-800 text-red-100 m-2 w-[200px]">Stop Producer</button>
       </div>
     </div>
     

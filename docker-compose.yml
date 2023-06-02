@@ -6,6 +6,7 @@ services:
     ports:
       - "9092:9092"
     environment:
+      KAFKA_OPT:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       KAFKA_DELETE_TOPIC_ENABLE: 'true'
       KRAFT_CONTAINER_HOST_NAME : kafka
