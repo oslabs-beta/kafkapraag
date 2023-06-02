@@ -1,7 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
 import GraphTemplate from "@components/GraphTemplate";
-import Chartjs from '@components/Chartjs'
 import ProducerTesting from "@components/ProducerTesting";
 import Stats from "@components/Stats";
 
@@ -85,23 +84,23 @@ const OverallMetrics = () => {
         // Inactive brokers
         const offlineBrokers = parsed[9].value.Value;
         
-        console.log(
-          // messagesTM,
-          'a',messagesOMR,
-          // producerTR,
-          'b',producerOMR,
-          // fproducerTR,
-          'c',fproducerOMR,
-          // consumerTR,
-          'd',consumerOMR,
-          // fconsumerTR,
-          'e',fconsumerOMR,
-          'f',totalTopics,
-          'g',totalPartitions,
-          'h',offlinePartitions,
-          'i',totalBrokers,
-          'j',offlineBrokers
-        );
+        // console.log(
+        //   // messagesTM,
+        //   'a',messagesOMR,
+        //   // producerTR,
+        //   'b',producerOMR,
+        //   // fproducerTR,
+        //   'c',fproducerOMR,
+        //   // consumerTR,
+        //   'd',consumerOMR,
+        //   // fconsumerTR,
+        //   'e',fconsumerOMR,
+        //   'f',totalTopics,
+        //   'g',totalPartitions,
+        //   'h',offlinePartitions,
+        //   'i',totalBrokers,
+        //   'j',offlineBrokers
+        // );
 
         // Get current date
         const curDate = new Date();
@@ -201,31 +200,36 @@ const OverallMetrics = () => {
       </div>
 
       <div className="mt-1 grid grid-cols-3">
+        
         <div>  
-          <GraphTemplate datapoints={mtm} fdatapoints = {[{x:'0', y: 0}]} visibleTicks={tickCache} title ={`Messages in Per Second`} />
-        </div>   
+          <GraphTemplate datapoints={mtm}
+          fdatapoints = {[{x:'0', y: 0}]}
+          visibleTicks={tickCache}
+          title ={`Messages in Per Second`} />
+        </div>
+
         <div>  
-          <GraphTemplate datapoints={producerOMR} fdatapoints={fproducerOMR} visibleTicks={tickCache} title ={`Producer Request Rate`}/>
+          <GraphTemplate datapoints={producerOMR}
+          fdatapoints={fproducerOMR}
+          visibleTicks={tickCache}
+          title ={`Producer Request Rate`}/>
         </div> 
+
         <div>  
-          <GraphTemplate datapoints={consumerOMR} fdatapoints={fconsumerOMR} visibleTicks={tickCache} title ={`Consumer Request Rate`}/>
+          <GraphTemplate datapoints={consumerOMR}
+          fdatapoints={fconsumerOMR}
+          visibleTicks={tickCache}
+          title ={`Consumer Request Rate`}/>
         </div>        
       </div>
 
       <div className="grid grid-cols-1">
-        {/* <div>
-        <Chartjs datapoints={mtm} visibleTicks={tickCache} />
-        </div>
-        <div>:
-        <Chartjs datapoints={mtm} visibleTicks={tickCache} />
-        </div>
-        <div>
-        <Chartjs datapoints={mtm} visibleTicks={tickCache} />
-        </div> */}
-
-        <Stats totalTopics = {totalTopics} totalPartitions = {totalPartitions} offlinePartitions = {offlinePartitions} totalBrokers = {totalBrokers} offlineBrokers = {offlineBrokers}/>
+        <Stats totalTopics = {totalTopics} 
+              totalPartitions = {totalPartitions}
+              offlinePartitions = {offlinePartitions}
+              totalBrokers = {totalBrokers}
+              offlineBrokers = {offlineBrokers}/>
       </div>
-
     </div>
   )
 }
