@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react";
 import GraphTemplate from "@components/GraphTemplate";
+import Nivo from "@components/nivo";
 
 const OverallMetrics = () => {
   const dataPoints: {x: string, y: number}[] = [];
@@ -13,6 +14,7 @@ const OverallMetrics = () => {
   // }
 
   const [ mtm, setMtm ] = useState(dataPoints);
+  const [ totalBrokers, setBrokers ] = useState('0');
   const [ tickCache, setTickCache ] = useState<string[]>(["",""]);
 
   useEffect(() => {
@@ -69,23 +71,23 @@ const OverallMetrics = () => {
         // Inactive brokers
         const offlineBrokers = parsed[9].value.Value;
         
-        // console.log(
-        //   messagesTM,
-        //   messagesOMR,
-        //   producerTR,
-        //   producerOMR,
-        //   fproducerTR,
-        //   fproducerOMR,
-        //   consumerTR,
-        //   consumerOMR,
-        //   fconsumerTR,
-        //   fconsumerOMR,
-        //   totalTopics,
-        //   totalPartitions,
-        //   offlinePartitions,
-        //   totalBrokers,
-        //   offlineBrokers
-        // );
+        console.log(
+          // messagesTM,
+          messagesOMR,
+          // producerTR,
+          producerOMR,
+          // fproducerTR,
+          fproducerOMR,
+          // consumerTR,
+          consumerOMR,
+          // fconsumerTR,
+          fconsumerOMR,
+          totalTopics,
+          totalPartitions,
+          offlinePartitions,
+          totalBrokers,
+          offlineBrokers
+        );
 
         // Get current date
         const curDate = new Date();
@@ -123,6 +125,8 @@ const OverallMetrics = () => {
           return newMtm;
         })
 
+        setBrokers(totalBrokers)
+
       })
       .catch((err) => console.log(err));
     }, 500)
@@ -136,6 +140,8 @@ const OverallMetrics = () => {
       <div className="m-10"></div>
       <div className="flex justify-center">
         <GraphTemplate datapoints={mtm} visibleTicks={tickCache} />
+        <GraphTemplate datapoints={totalBrokers} visibleTicks={tickCache} />
+        <Nivo />
       </div>
     </div>
   )
