@@ -6,7 +6,7 @@ import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from 'victory'
 const FETCH_RATE: number = 2000
 
 // BytesPerSecond graph component
-const BrokersBytesInGraph = (): React.ReactNode => {
+const BrokersBytesInGraph: React.FC = () => {
   // const dataPoints = new Array(100).fill({ x: "", y: 0 });
   const dataPoints: Array<{ x: string, y: number, count: number, timestamp: number }> = []
   for (let i = 0; i < 100; i++) {

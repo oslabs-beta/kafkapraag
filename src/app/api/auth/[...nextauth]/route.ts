@@ -1,12 +1,12 @@
-import NextAuth from "next-auth/next";
+import NextAuth from 'next-auth/next'
 import GoogleProvider from 'next-auth/providers/google'
-import GitHubProvider from "next-auth/providers/github";
+import GitHubProvider from 'next-auth/providers/github'
 
-const googleId: string = process.env.GOOGLE_CLIENT_ID ? process.env.GOOGLE_CLIENT_ID : "";
-const googleSecret: string = process.env.GOOGLE_CLIENT_SECRET ? process.env.GOOGLE_CLIENT_SECRET : "";
+const googleId: string = process.env.GOOGLE_CLIENT_ID !== undefined ? process.env.GOOGLE_CLIENT_ID : 'default'
+const googleSecret: string = process.env.GOOGLE_CLIENT_SECRET !== undefined ? process.env.GOOGLE_CLIENT_SECRET : 'default'
 
-const ghId: string = process.env.GITHUB_ID ? process.env.GITHUB_ID : "";
-const ghSecret: string = process.env.GITHUB_SECRET ? process.env.GITHUB_SECRET : "";
+const ghId: string = process.env.GITHUB_ID !== undefined ? process.env.GITHUB_ID : 'default'
+const ghSecret: string = process.env.GITHUB_SECRET !== undefined ? process.env.GITHUB_SECRET : 'default'
 
 const authOptions = {
   providers: [
@@ -18,7 +18,7 @@ const authOptions = {
       clientId: ghId,
       clientSecret: ghSecret
     })
-  ],
+  ]
   // callbacks: {
   //   redirect: async () => {
   //     return Promise.resolve('http://localHost:3000/testing')
@@ -28,4 +28,4 @@ const authOptions = {
 
 const handler = NextAuth(authOptions)
 
-export {handler as GET, handler as POST}
+export { handler as GET, handler as POST }
