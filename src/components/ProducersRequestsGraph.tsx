@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from "victory";
 
 // Set constant for how often to fetch data for populating graph
-const FETCH_RATE: number = 100;
+const FETCH_RATE: number = 2000;
 
 // ProducersRate graph component
 const ProducersRate = () => {
@@ -72,7 +72,7 @@ const ProducersRate = () => {
   }, []);
 
   return (
-    <div className="h-auto w-[600px] bg-neutral-content rounded-3xl">
+    <div className="h-auto w-[600px]">
       <VictoryChart>
         <VictoryLabel
           text={`Producer Requests per Minute: ${Math.round(ProducersRate[ProducersRate.length - 1].y)}`}

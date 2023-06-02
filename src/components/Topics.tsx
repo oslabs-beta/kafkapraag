@@ -18,14 +18,14 @@ const Topics = () => {
                 // console.log('filteredData: ', filteredData)
                 setTopic(filteredData.length)
             })
-        })
+        }, 2000)
         return () => {clearInterval(interval)};
     }, []);
     return(
-        <div className="stats shadow">
-            <div className="stat">
-                <div className="stat-title">Total Topics</div>
-                <div className="stat-value">{Topic}</div>
+        <div className="stats border-none shadow-none text-center">
+            <div className="stat border-none shadow-none text-center">
+                <div className="stat-title font-extralight">Total Topics</div>
+                <div className="stat-value font-extralight text-primary">{Topic}</div>
             </div>
         </div>
     )

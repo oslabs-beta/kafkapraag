@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@nivo/pie": "^0.83.0",
     "@types/node": "20.1.4",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -22,10 +21,10 @@
     "kafkajs": "^2.2.4",
     "next": "13.4.2",
     "next-auth": "^4.22.1",
-    "nivo": "^0.31.0",
     "postcss": "8.4.23",
     "prettier": "^2.8.8",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "socket.io-client": "^4.6.2",
     "tailwindcss": "3.3.2",
