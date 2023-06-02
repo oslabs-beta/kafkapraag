@@ -1,8 +1,7 @@
-"use client"
-import Link from "next/link";
+'use client'
+import Link from 'next/link'
 
-const Login = () => {
-
+const Login: React.FC = () => {
   // // Make login fetch request to check if already logged in
   // useEffect(() => {
   //   fetch('/api/login', {
@@ -14,7 +13,7 @@ const Login = () => {
   //   })
   //   .then((data) => data.json())
   //   .then((parsed) => {
-      
+
   //   })
   //   .catch((err) => console.log(err));
   // }, [])
@@ -40,7 +39,7 @@ const Login = () => {
               </label>
               <input type="text" placeholder="password" className="input input-bordered" />
               <label className="label">
-                <p className="text-sm">Don't have an account? <span><Link href="/signup" className="label-text-alt link link-hover text-sm">Click here to signup.</Link></span></p>
+                <p className="text-sm">Don&apos;t have an account? <span><Link href="/signup" className="label-text-alt link link-hover text-sm">Click here to signup.</Link></span></p>
               </label>
             </div>
             <div className="form-control mt-6">
@@ -53,4 +52,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default Login

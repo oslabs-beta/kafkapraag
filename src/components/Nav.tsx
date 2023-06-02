@@ -1,29 +1,28 @@
-"use client"
-import Link from "next/link";
-import { useState } from "react";
+'use client'
+import Link from 'next/link'
+import { useState } from 'react'
 
-import { getProviders, signIn, signOut} from 'next-auth/react'
-type NavProps = {
+import { getProviders, signOut } from 'next-auth/react'
+interface NavProps {
   children: React.ReactNode
 }
 
 const Nav: React.FC<NavProps> = ({ children }) => {
-
-  const [theme, setTheme] = useState("garden");
+  const [theme, setTheme] = useState('garden')
 
   const swapTheme = (): void => {
     setTheme((prevTheme) => {
-      const newTheme = prevTheme === "garden" ? "dark" : "garden";
-      const html = document.querySelector('html');
-      html?.setAttribute("data-theme", newTheme);
-      return newTheme;
+      const newTheme = prevTheme === 'garden' ? 'dark' : 'garden'
+      const html = document.querySelector('html')
+      html?.setAttribute('data-theme', newTheme)
+      return newTheme
     })
   }
 
   return (
     <>
       <div className="drawer drawer-mobile">
-        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" /> 
+        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* <!-- Navbar --> */}
           <div className="w-full navbar base-100">
@@ -31,11 +30,11 @@ const Nav: React.FC<NavProps> = ({ children }) => {
               <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
               </label>
-            </div> 
+            </div>
             <div className="flex-1">
               <Link className="flex-0 btn btn-ghost px-2 lg:hidden" href="/">
                 <div className="font-title text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
-                  <span className="lowercase">kafka<span className="text-base-content uppercase">PRAAG</span></span> 
+                  <span className="lowercase">kafka<span className="text-base-content uppercase">PRAAG</span></span>
                 </div>
               </Link>
             </div>
@@ -56,30 +55,28 @@ const Nav: React.FC<NavProps> = ({ children }) => {
           </div>
           {/* <!-- Page content here --> */}
           {children}
-        </div> 
+        </div>
         <div className="drawer-side">
-          <label htmlFor="my-drawer-3" className="drawer-overlay"></label> 
+          <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
           <div className="bg-base-200 w-80">
             <div className="z-20 bg-base-200 bg-opacity-90 backdrop-blur sticky top-0 items-center gap-2 px-4 py-2 hidden lg:flex ">
               <Link className="flex-0 btn btn-ghost px-2" href="/">
                 <div className="font-title text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
-                  <span className="lowercase">kafka<span className="text-base-content uppercase">PRAAG</span></span> 
+                  <span className="lowercase">kafka<span className="text-base-content uppercase">PRAAG</span></span>
                 </div>
               </Link>
             </div>
             <ul className="menu p-4 flex flex-col font-semibold text-lg">
               {/* <!-- Sidebar content here --> */}
-              <li><button onClick={async (e)=> {
-
-                const prov =  await getProviders();
-                console.log('prov:',prov)
+              <li><button onClick={async (e) => {
+                const prov = await getProviders()
+                console.log('prov:', prov)
                 // signIn(prov, {callbackUrl: 'http://localhost:3000/testing'})
               }}>Login</button></li>
-              <li><button onClick={(e)=> {
-                signOut({callbackUrl: 'http://localhost:3000'})
+              <li><button onClick={(e) => {
+                signOut({ callbackUrl: 'http://localhost:3000' })
                 console.log(e)
-                
-                }}>Logout</button></li>
+              }}>Logout</button></li>
               {/* <li><Link href="/signup">Signup</Link></li> */}
               <li><Link href="/overall">Overall Metrics</Link></li>
               <li><Link href="/brokers">Broker Metrics</Link></li>
@@ -95,5 +92,4 @@ const Nav: React.FC<NavProps> = ({ children }) => {
   )
 }
 
-export default Nav;
-
+export default Nav

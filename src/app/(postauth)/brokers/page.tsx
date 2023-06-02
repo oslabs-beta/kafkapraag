@@ -1,8 +1,7 @@
-"use client"
-import BytesPerSecond from "@components/BrokersBytesInGraph";
+'use client'
+import BytesPerSecond from '@components/BrokersBytesInGraph'
 
-const Brokers = () => {
-
+const Brokers: React.FC = () => {
   return (
     <div className="flex-column">
       <p className="text-center text-4xl font-bold">Metrics</p>
@@ -14,4 +13,4 @@ const Brokers = () => {
   )
 }
 
-export default Brokers;
+export default Brokers

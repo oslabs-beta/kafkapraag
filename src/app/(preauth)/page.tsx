@@ -22,7 +22,7 @@ const Landing = () => {
 
             <button className="btn btn-primary px-10 m-2 w-[200px]" onClick={async (e)=> {
             const prov =  await getProviders();
-            signIn(prov, {callbackUrl: 'http://localhost:3000/testing'})
+            signIn("google", {callbackUrl: 'http://localhost:3000/testing'})
             }}>Login</button>
           </div>
         </div>

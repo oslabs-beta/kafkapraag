@@ -1,15 +1,17 @@
-"use client"
+'use client'
 
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from 'next-auth/react'
 
-type RootLayoutProps = {
+interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export default function Provider ({children}) {
+const Provider: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <SessionProvider>
       {children}
     </SessionProvider>
   )
 }
+
+export default Provider

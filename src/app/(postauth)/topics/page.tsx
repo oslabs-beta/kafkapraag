@@ -1,8 +1,7 @@
-"use client"
-import Topics from "@components/Topics";
+'use client'
+import Topics from '@components/Topics'
 
-const Topic = () => {
-
+const Topic: React.FC = () => {
   return (
     <div className="flex-column">
       <p className="text-center text-4xl font-bold">Producers Request Rate</p>
@@ -14,4 +13,4 @@ const Topic = () => {
   )
 }
 
-export default Topic;
+export default Topic
