@@ -6,10 +6,9 @@ import TopicsNames from "@components/TopicsNames";
 
 const OverallMetrics = () => {
   return (
-    <div className="flex-column">
-      <p className="text-center text-4xl font-bold">Producers Request Rate</p>
-      <div className="m-10"></div>
-      <div className="flex justify-center">
+    <div className="">
+      <p className="text-center text-4xl font-light">Producers Request Rate</p>
+      <div className="mt-10 grid grid-cols-2">
         <ProducersRate/>
         <BytesPerSecond/>
         <Topics/>
