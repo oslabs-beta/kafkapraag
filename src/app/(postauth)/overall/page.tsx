@@ -1,6 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
 import GraphTemplate from '@components/GraphTemplate'
+import ProducerTesting from '@components/ProducerTesting'
+import Stats from '@components/Stats'
 
 const OverallMetrics: React.FC = () => {
   const dataPoints: Array<{ x: string, y: number }> = []
@@ -13,6 +15,17 @@ const OverallMetrics: React.FC = () => {
   // }
 
   const [mtm, setMtm] = useState(dataPoints)
+  const [producerOMR, setProducerOMR] = useState(dataPoints)
+  const [fproducerOMR, setfProducerOMR] = useState(dataPoints)
+  const [consumerOMR, setConsumerOMR] = useState(dataPoints)
+  const [fconsumerOMR, setfConsumerOMR] = useState(dataPoints)
+  // const [ totalBrokers, setBrokers ] = useState('0');
+  const [totalTopics, setTotalTopics] = useState(10)
+  const [totalPartitions, setTotalPartitions] = useState(10)
+  const [offlinePartitions, setOfflinePartitions] = useState(10)
+  const [totalBrokers, setTotalBrokers] = useState(10)
+  const [offlineBrokers, setOfflineBrokers] = useState(10)
+
   const [tickCache, setTickCache] = useState<string[]>(['', ''])
 
   useEffect(() => {
@@ -42,9 +55,10 @@ const OverallMetrics: React.FC = () => {
       })
         .then(async (data) => await data.json())
         .then((parsed) => {
-        // Destructure the fetched data
-        // Messages In
-        // const messagesTM = parsed[0].value.Count; // Total messages
+          console.log('parsed', parsed)
+          // Destructure the fetched data
+          // Messages In
+          // const messagesTM = parsed[0].value.Count; // Total messages
           const messagesOMR = parsed[0].value.OneMinuteRate // Messages one minute rate
           // Producer Requests
           // const producerTR = parsed[1].value.Count; // Total requests
@@ -70,21 +84,21 @@ const OverallMetrics: React.FC = () => {
           const offlineBrokers = parsed[9].value.Value
 
           // console.log(
-          //   messagesTM,
-          //   messagesOMR,
-          //   producerTR,
-          //   producerOMR,
-          //   fproducerTR,
-          //   fproducerOMR,
-          //   consumerTR,
-          //   consumerOMR,
-          //   fconsumerTR,
-          //   fconsumerOMR,
-          //   totalTopics,
-          //   totalPartitions,
-          //   offlinePartitions,
-          //   totalBrokers,
-          //   offlineBrokers
+          //   // messagesTM,
+          //   'a',messagesOMR,
+          //   // producerTR,
+          //   'b',producerOMR,
+          //   // fproducerTR,
+          //   'c',fproducerOMR,
+          //   // consumerTR,
+          //   'd',consumerOMR,
+          //   // fconsumerTR,
+          //   'e',fconsumerOMR,
+          //   'f',totalTopics,
+          //   'g',totalPartitions,
+          //   'h',offlinePartitions,
+          //   'i',totalBrokers,
+          //   'j',offlineBrokers
           // );
 
           // Get current date
@@ -122,6 +136,51 @@ const OverallMetrics: React.FC = () => {
             })
             return newMtm
           })
+
+          setProducerOMR((prev) => {
+            const newPOMR = prev.slice()
+            newPOMR.shift()
+            newPOMR.push({
+              x: curTime,
+              y: producerOMR
+            })
+            return newPOMR
+          })
+
+          setfProducerOMR((prev) => {
+            const newPOMR = prev.slice()
+            newPOMR.shift()
+            newPOMR.push({
+              x: curTime,
+              y: fproducerOMR
+            })
+            return newPOMR
+          })
+
+          setConsumerOMR((prev) => {
+            const newCOMR = prev.slice()
+            newCOMR.shift()
+            newCOMR.push({
+              x: curTime,
+              y: consumerOMR
+            })
+            return newCOMR
+          })
+
+          setfConsumerOMR((prev) => {
+            const newCOMR = prev.slice()
+            newCOMR.shift()
+            newCOMR.push({
+              x: curTime,
+              y: fconsumerOMR
+            })
+            return newCOMR
+          })
+          setTotalTopics(totalTopics)
+          setTotalPartitions(totalPartitions)
+          setOfflinePartitions(offlinePartitions)
+          setTotalBrokers(totalBrokers)
+          setOfflineBrokers(offlineBrokers)
         })
         .catch((err) => { console.log(err) })
     }, 500)
@@ -130,11 +189,42 @@ const OverallMetrics: React.FC = () => {
   }, [])
 
   return (
-    <div className="flex-column">
-      <p className="text-center text-4xl font-bold">Producers Request Rate</p>
-      <div className="m-10"></div>
-      <div className="flex justify-center">
-        <GraphTemplate datapoints={mtm} visibleTicks={tickCache} />
+    <div className="">
+      <p className="text-center text-4xl font-light">Dashboard</p>
+      <div>
+        <ProducerTesting />
+      </div>
+
+      <div className="mt-1 grid grid-cols-3">
+
+        <div>
+          <GraphTemplate datapoints={mtm}
+          fdatapoints = {[{ x: '0', y: 0 }]}
+          visibleTicks={tickCache}
+          title ={'Messages in Per Second'} />
+        </div>
+
+        <div>
+          <GraphTemplate datapoints={producerOMR}
+          fdatapoints={fproducerOMR}
+          visibleTicks={tickCache}
+          title ={'Producer Request Rate'}/>
+        </div>
+
+        <div>
+          <GraphTemplate datapoints={consumerOMR}
+          fdatapoints={fconsumerOMR}
+          visibleTicks={tickCache}
+          title ={'Consumer Request Rate'}/>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1">
+        <Stats totalTopics = {totalTopics}
+              totalPartitions = {totalPartitions}
+              offlinePartitions = {offlinePartitions}
+              totalBrokers = {totalBrokers}
+              offlineBrokers = {offlineBrokers}/>
       </div>
     </div>
   )

@@ -14,7 +14,7 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <Provider>
-    <html lang="en" data-theme="garden">
+    <html lang="en" data-theme="mytheme">
       <body>
         <main>
           {children}

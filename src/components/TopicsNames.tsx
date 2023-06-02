@@ -41,7 +41,7 @@ const TopicsNames: React.FC = () => {
           // console.log('tabled', tabled)
         })
         .catch((err) => { console.log(err) })
-    }, 5000)
+    }, 1000)
     return () => { clearInterval(interval) }
   }, [])
   return (
@@ -50,8 +50,8 @@ const TopicsNames: React.FC = () => {
                 {/* head */}
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th>Name</th>
+                        <th className="bg-transparent font-light text-accent">Topic</th>
+                        <th className="bg-transparent font-light text-accent">Name</th>
                     </tr>
                 </thead>
                 <tbody>

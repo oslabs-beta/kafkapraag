@@ -1,29 +1,37 @@
-"use client"
+'use client'
 
-import Link from "next/link";
+import Image from 'next/image'
+import logo from 'src/assets/kafkaPRAAG-logo-transparent.png'
 
-import { getProviders, signIn, signOut} from 'next-auth/react'
-type NavProps = {
-  children: React.ReactNode
-}
+import { getProviders, signIn } from 'next-auth/react'
+// interface NavProps {
+//   children: React.ReactNode
+// }
 
-const Landing = () => {
-  
+const Landing: React.FC = () => {
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero min-h-screen">
       <div className="hero-content text-center">
         <div className="max-w-lg flex flex-col justify-center items-center">
           <div className="font-title font-semibold text-primary inline-flex text-6xl transition-all duration-200 md:text-8xl text-center">
-            <span className="lowercase">kafka<span className="text-base-content uppercase">PRAAG</span></span> 
-          </div>
-          <p className="py-6 text-lg max-w-xs md:text-xl md:max-w-lg">Your Apache Kafka health and performance visualizer.</p>
-          <div className="flex flex-col items-center md:inline">
-            {/* <Link href="api/auth/signin" className="btn btn-primary px-10 m-2 w-[200px]">Login</Link> */}
+            <Image
+      src={logo}
+      alt="kafkaPRAAG logo"
+      width={700}
+      height={700}
+    />
 
-            <button className="btn btn-primary px-10 m-2 w-[200px]" onClick={async (e)=> {
-            const prov =  await getProviders();
-            signIn("google", {callbackUrl: 'http://localhost:3000/testing'})
-            }}>Login</button>
+          </div>
+          <p className="py-6 text-lg max-w-xs md:text-xl md:max-w-lg font-light">Your<span className="font-semibold"> Apache Kafka </span>health and performance visualizer.</p>
+          <div className="flex flex-col items-center md:inline">
+            <button className="btn btn-primary px-10 m-2 w-[200px]" onClick={() => {
+              getProviders()
+                .then((data) => {
+                  signIn('google', { callbackUrl: 'http://localhost:3000/testing' })
+                    .catch((err) => { console.log(err) })
+                })
+                .catch((err) => { console.log(err) })
+            }}>Authenticate</button>
           </div>
         </div>
       </div>
@@ -31,4 +39,4 @@ const Landing = () => {
   )
 }
 
-export default Landing;
+export default Landing

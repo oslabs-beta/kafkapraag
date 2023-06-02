@@ -1,5 +1,4 @@
 'use client'
-import { useState, useEffect } from 'react'
 import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from 'victory'
 
 interface Datapoint {
@@ -9,26 +8,39 @@ interface Datapoint {
 
 interface GraphTemplateProps {
   datapoints: Datapoint[]
+  fdatapoints: Datapoint[]
   visibleTicks: string[]
+  title: string
 }
 
 // BytesPerSecond graph component
-const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, visibleTicks }) => {
+const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, visibleTicks, title }) => {
+  const chartTitle = `${title} : ${Math.round(datapoints[datapoints.length - 1].y)}`
+
   return (
-    <div className="h-auto w-[750px] bg-neutral-content rounded-3xl p-10">
+    <div className="h-auto w-[750px] bg-white rounded-m p-2">
       <VictoryChart>
         <VictoryLabel
-          text={`Messages per second, one minute average: ${Math.round(datapoints[datapoints.length - 1].y)}`}
+          text= {chartTitle}
           x={48} // Adjust the x-coordinate to position the label horizontally
           y={30} // Adjust the y-coordinate to position the label vertically
           // textAnchor="middle"  // Set textAnchor to "middle" for center alignment
         />
         <VictoryLine
           style={{
-            data: { stroke: '#c43a31' },
+            data: { stroke: '#570DF8' },
             parent: { border: '1px solid #ccc' }
           }}
           data={datapoints}
+          domain={{ y: [0, 10] }}
+          interpolation="basis"
+        />
+        <VictoryLine
+          style={{
+            data: { stroke: '#c43a31' },
+            parent: { border: '1px solid #ccc' }
+          }}
+          data={fdatapoints}
           domain={{ y: [0, 10] }}
           interpolation="basis"
         />

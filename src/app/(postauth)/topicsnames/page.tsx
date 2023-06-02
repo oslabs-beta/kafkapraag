@@ -8,9 +8,8 @@ const Test: React.FC = () => {
   if (session != null) {
     return (
     <div className="flex-column">
-      <p className="text-center text-4xl font-bold">Topics Names</p>
-      <div className="m-10"></div>
-      <div className="flex justify-center">
+      <p className="text-center text-4xl font-light">Topics Names</p>
+      <div className="flex justify-center font-extralight italic mt-10">
         <TopicsNames/>
       </div>
     </div>
