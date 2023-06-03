@@ -1,9 +1,6 @@
-"use client"
+import ProducerTesting from '@components/ProducerTesting'
 
-import ProducerTesting from "@components/ProducerTesting";
-
-const ProducersRequestRate = () => {
-
+const ProducersRequestRate: React.FC = () => {
   return (
     <div className="flex-column">
       <h2 className="text-center text-4xl font-light">Cluster Testing</h2>
@@ -14,4 +11,4 @@ const ProducersRequestRate = () => {
   )
 }
 
-export default ProducersRequestRate;
+export default ProducersRequestRate

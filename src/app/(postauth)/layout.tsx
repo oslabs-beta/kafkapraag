@@ -1,17 +1,16 @@
 import '@app/globals.css'
-import Nav from '@components/Nav';
+import Nav from '@components/Nav'
 
 export const metadata = {
   title: 'kafkaPRAAG',
-  description: 'A health and performance visualizer',
+  description: 'A health and performance visualizer'
 }
 
-type RootLayoutProps = {
+interface RootLayoutProps {
   children: React.ReactNode
 }
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
-
   return (
           <Nav >
             {children}
@@ -19,4 +18,4 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   )
 }
 
-export default RootLayout;
+export default RootLayout

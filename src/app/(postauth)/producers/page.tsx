@@ -1,8 +1,6 @@
-"use client"
-import ProducersRequestRateGraph from "@components/ProducersRequestsGraph";
+import ProducersRequestRateGraph from '@components/ProducersRequestsGraph'
 
-const ProducersRequestRate = () => {
-
+const ProducersRequestRate: React.FC = () => {
   return (
     <div className="flex-column">
       <p className="text-center text-4xl font-light">Producers Request Rate</p>
@@ -13,4 +11,4 @@ const ProducersRequestRate = () => {
   )
 }
 
-export default ProducersRequestRate;
+export default ProducersRequestRate

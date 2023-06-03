@@ -1,13 +1,12 @@
-"use client"
-import { useState, useEffect } from "react";
-import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from "victory";
+'use client'
+import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from 'victory'
 
-type Datapoint = {
-  x: string,
-  y: number,
+interface Datapoint {
+  x: string
+  y: number
 }
 
-type GraphTemplateProps = {
+interface GraphTemplateProps {
   datapoints: Datapoint[]
   fdatapoints: Datapoint[]
   visibleTicks: string[]
@@ -16,34 +15,33 @@ type GraphTemplateProps = {
 
 // BytesPerSecond graph component
 const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, visibleTicks, title }) => {
-
-  const chartTitle =`${title} : ${Math.round(datapoints[datapoints.length - 1].y)}`;
+  const chartTitle = `${title} : ${Math.round(datapoints[datapoints.length - 1].y)}`
 
   return (
     <div className="h-auto w-auto bg-white rounded-m">
       <VictoryChart>
         <VictoryLabel
           text= {chartTitle}
-          x={48}  // Adjust the x-coordinate to position the label horizontally
-          y={30}   // Adjust the y-coordinate to position the label vertically
+          x={48} // Adjust the x-coordinate to position the label horizontally
+          y={30} // Adjust the y-coordinate to position the label vertically
           // textAnchor="middle"  // Set textAnchor to "middle" for center alignment
         />
         <VictoryLine
           style={{
-            data: { stroke: "#570DF8" },
-            parent: { border: "1px solid #ccc"}
+            data: { stroke: '#570DF8' },
+            parent: { border: '1px solid #ccc' }
           }}
           data={datapoints}
-          domain={{y: [0, 10]}}
+          domain={{ y: [0, 10] }}
           interpolation="basis"
         />
         <VictoryLine
           style={{
-            data: { stroke: "#c43a31" },
-            parent: { border: "1px solid #ccc"}
+            data: { stroke: '#c43a31' },
+            parent: { border: '1px solid #ccc' }
           }}
           data={fdatapoints}
-          domain={{y: [0, 10]}}
+          domain={{ y: [0, 10] }}
           interpolation="basis"
         />
         <VictoryAxis crossAxis
@@ -53,10 +51,10 @@ const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, 
               // If initial state ticks are cleared and tickCache contains a particular tick
               if (tick.length > 2 && visibleTicks.includes(tick)) {
                 // Render that tick up to the seconds position, dropping the milliseconds
-                return tick.slice(0, 8);
+                return tick.slice(0, 8)
               } else {
                 // Otherwise don't render that tick
-                return "";
+                return ''
               }
             }
           }
@@ -68,4 +66,4 @@ const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, 
   )
 }
 
-export default GraphTemplate;
+export default GraphTemplate

@@ -1,10 +1,10 @@
-"use client"
-import Link from "next/link";
-import { useState, useEffect } from "react";
+'use client'
+import Link from 'next/link'
+// import { useState, useEffect } from 'react'
 
-const Signup = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+const Signup: React.FC = () => {
+  // const [username, setUsername] = useState('')
+  // const [password, setPassword] = useState('')
 
   // // Make login fetch request to check if already logged in
   // useEffect(() => {
@@ -17,7 +17,7 @@ const Signup = () => {
   //   })
   //   .then((data) => data.json())
   //   .then((parsed) => {
-      
+
   //   })
   //   .catch((err) => console.log(err));
   // }, [])
@@ -56,4 +56,4 @@ const Signup = () => {
   )
 }
 
-export default Signup;
+export default Signup
