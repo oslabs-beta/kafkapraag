@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from 'victory'
 
-// Set constant for how often to fetch data for populating graph
+// Set fetch rate for populating graph
 const FETCH_RATE: number = 2000
 
 // BytesPerSecond graph component
