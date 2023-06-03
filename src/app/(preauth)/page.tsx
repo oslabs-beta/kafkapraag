@@ -27,7 +27,7 @@ const Landing: React.FC = () => {
             <button className="btn btn-primary px-10 m-2 w-[200px]" onClick={() => {
               getProviders()
                 .then((data) => {
-                  signIn('google', { callbackUrl: 'http://localhost:3000/testing' })
+                  signIn('_', { callbackUrl: 'http://localhost:3000/overall' })
                     .catch((err) => { console.log(err) })
                 })
                 .catch((err) => { console.log(err) })
