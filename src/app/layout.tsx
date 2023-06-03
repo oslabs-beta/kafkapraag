@@ -13,6 +13,7 @@ interface RootLayoutProps {
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
+    // Provider component to allow NextAuth authentication
     <Provider>
     <html lang="en" data-theme="mytheme">
       <body>
