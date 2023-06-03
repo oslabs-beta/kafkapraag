@@ -18,18 +18,15 @@ class DummyProducer {
   }
 
   private createProducer (): Producer {
-    // Connect to cluster
     const kafka = new Kafka({
       clientId: this.clientId,
       brokers: this.brokers
     })
-    // Create producer
     return kafka.producer()
   }
 
   public async start (): Promise<void> {
     try {
-      // Connect producer
       await this.producer.connect()
     } catch (error) {
       console.log('Error connecting producer', error)
@@ -51,7 +48,6 @@ class DummyProducer {
 
   public async stop (): Promise<void> {
     try {
-      // Disconnect the producer
       if (this.activeInterval !== null) clearInterval(this.activeInterval)
       await this.producer.disconnect()
     } catch (error) {

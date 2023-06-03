@@ -1,6 +1,8 @@
 'use client'
+
 import Image from 'next/image'
 import logo from 'src/assets/kafkaPRAAG-logo-transparent.png'
+
 import { getProviders, signIn } from 'next-auth/react'
 
 const Landing: React.FC = () => {
