@@ -8,16 +8,20 @@ export async function GET (): Promise<NextResponse> {
 }
 
 export async function POST (req: Request, res: Response): Promise<NextResponse> {
-  console.log('Hit producer POST route')
-  const data = await req.json()
-  console.log(data)
-  const { producerName, clientId, brokers, message } = data
-  const interval = 1000 / message.rate
-  // Test topic
-  const topic = 'topic1'
+  try {
+    console.log('Hit producer POST route')
+    const data = await req.json()
+    console.log(data)
+    const { producerName, clientId, brokers, message } = data
+    const interval = 1000 / message.rate
+    // Test topic
+    const topic = 'topic1'
 
-  await producers.startProducer(producerName, interval, clientId, brokers)
-  await producers.sendMessage(producerName, topic)
+    const started = await producers.startProducer(producerName, interval, clientId, brokers)
+    if (started) await producers.sendMessage(producerName, topic)
+  } catch (error) {
+    console.log(error)
+  }
 
   return NextResponse.json({ message: 'Producer started.' })
 }

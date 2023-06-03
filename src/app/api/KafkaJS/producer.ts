@@ -41,7 +41,10 @@ class DummyProducer {
         topic,
         messages
       })
-        .catch((err) => { console.log(err) })
+        .catch((err) => {
+          console.log(err)
+          if (this.activeInterval !== null) clearInterval(this.activeInterval)
+        })
     }, this.interval)
   }
 
@@ -64,7 +67,7 @@ export default class ProducerList {
     this.producers = {}
   }
 
-  public async startProducer (producerName: string, interval: number, clientId: string, brokers: string[]): Promise<void> {
+  public async startProducer (producerName: string, interval: number, clientId: string, brokers: string[]): Promise<boolean> {
     try {
       // If user entered a name for a producer that already exists
       if (Object.hasOwn(this.producers, producerName)) {
@@ -74,8 +77,10 @@ export default class ProducerList {
       await newProducer.start()
       // Add producer to producers object
       this.producers[producerName] = newProducer
+      return true
     } catch (error) {
       console.log('Error instantiating new dummy producer', error)
+      return false
     }
   }
 

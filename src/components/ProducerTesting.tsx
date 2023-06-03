@@ -11,7 +11,7 @@ const ProducerTesting: React.FC = () => {
   // const [brokers, setBrokers] = useState(['localhost:9092'])
   // const [clientId, setClientId] = useState('kafkajs-producer1')
   // Change these from hardcoded values to useState when adding feature to choose cluster connection
-  const clientId = ['127.0.0.1:9092']
+  const clientId = ['localhost:9092']
   const brokers = 'kafkajs-producer1'
 
   const handleProducerNameInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
