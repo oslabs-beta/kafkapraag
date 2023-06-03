@@ -1,15 +1,14 @@
-"use client"
+'use client'
 
-import Image from 'next/image';
-import logo from "src/assets/kafkaPRAAG-logo-transparent.png"
+import Image from 'next/image'
+import logo from 'src/assets/kafkaPRAAG-logo-transparent.png'
 
-import { getProviders, signIn, signOut} from 'next-auth/react'
-type NavProps = {
-  children: React.ReactNode
-}
+import { getProviders, signIn } from 'next-auth/react'
+// interface NavProps {
+//   children: React.ReactNode
+// }
 
-const Landing = () => {
-  
+const Landing: React.FC = () => {
   return (
     <div className="hero min-h-screen">
       <div className="hero-content text-center">
@@ -23,11 +22,15 @@ const Landing = () => {
     />
 
           </div>
-          <p className="py-6 text-lg max-w-xs md:text-xl md:max-w-lg font-light">Your<span class="font-semibold"> Apache Kafka </span>health and performance visualizer.</p>
+          <p className="py-6 text-lg max-w-xs md:text-xl md:max-w-lg font-light">Your<span className="font-semibold"> Apache Kafka </span>health and performance visualizer.</p>
           <div className="flex flex-col items-center md:inline">
-            <button className="btn btn-primary px-10 m-2 w-[200px]" onClick={async (e)=> {
-            const prov =  await getProviders();
-            signIn(prov, {callbackUrl: 'http://localhost:3000/testing'})
+            <button className="btn btn-primary px-10 m-2 w-[200px]" onClick={() => {
+              getProviders()
+                .then((data) => {
+                  signIn('_', { callbackUrl: 'http://localhost:3000/overall' })
+                    .catch((err) => { console.log(err) })
+                })
+                .catch((err) => { console.log(err) })
             }}>Authenticate</button>
           </div>
         </div>
@@ -36,4 +39,4 @@ const Landing = () => {
   )
 }
 
-export default Landing;
+export default Landing
