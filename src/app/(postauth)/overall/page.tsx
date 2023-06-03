@@ -19,7 +19,6 @@ const OverallMetrics = () => {
   const [ fproducerOMR, setfProducerOMR ] = useState(dataPoints);
   const [ consumerOMR, setConsumerOMR ] = useState(dataPoints);
   const [ fconsumerOMR, setfConsumerOMR ] = useState(dataPoints);
-  // const [ totalBrokers, setBrokers ] = useState('0');
   const [ totalTopics, setTotalTopics ] = useState(10);
   const [ totalPartitions, setTotalPartitions ] = useState(10);
   const [ offlinePartitions, setOfflinePartitions ] = useState(10);
@@ -177,6 +176,7 @@ const OverallMetrics = () => {
           })
           return newCOMR;
         })
+
         setTotalTopics(totalTopics)
         setTotalPartitions(totalPartitions)
         setOfflinePartitions(offlinePartitions)
@@ -193,44 +193,55 @@ const OverallMetrics = () => {
 
 
   return (
-    <div className="">
-      <p className="text-center text-4xl font-light">Dashboard</p>
-      <div>
+    <div className="container mx-auto rounded-lg shadow-md p-4">
+
+    <p className="text-center text-4xl font-light">Dashboard</p>
+  
+    <div className="my-8 bg-white rounded-md">
         <ProducerTesting />
-      </div>
+    </div>
 
-      <div className="mt-1 grid grid-cols-3">
-        
-        <div>  
-          <GraphTemplate datapoints={mtm}
-          fdatapoints = {[{x:'0', y: 0}]}
+    <div className="mt-8">
+        <Stats
+          totalTopics={totalTopics}
+          totalPartitions={totalPartitions}
+          offlinePartitions={offlinePartitions}
+          totalBrokers={totalBrokers}
+          offlineBrokers={offlineBrokers}
+        />
+    </div>
+  
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+
+      <div className="">
+        <GraphTemplate
+          datapoints={mtm}
+          fdatapoints={[{ x: '0', y: 0 }]}
           visibleTicks={tickCache}
-          title ={`Messages in Per Second`} />
-        </div>
-
-        <div>  
-          <GraphTemplate datapoints={producerOMR}
+          title={`Messages in Per Second`}
+        />
+      </div>
+  
+      <div className="">
+        <GraphTemplate
+          datapoints={producerOMR}
           fdatapoints={fproducerOMR}
           visibleTicks={tickCache}
-          title ={`Producer Request Rate`}/>
-        </div> 
-
-        <div>  
-          <GraphTemplate datapoints={consumerOMR}
+          title={`Producer Request Rate`}
+        />
+      </div>
+  
+      <div className="">
+        <GraphTemplate
+          datapoints={consumerOMR}
           fdatapoints={fconsumerOMR}
           visibleTicks={tickCache}
-          title ={`Consumer Request Rate`}/>
-        </div>        
-      </div>
-
-      <div className="grid grid-cols-1">
-        <Stats totalTopics = {totalTopics} 
-              totalPartitions = {totalPartitions}
-              offlinePartitions = {offlinePartitions}
-              totalBrokers = {totalBrokers}
-              offlineBrokers = {offlineBrokers}/>
+          title={`Consumer Request Rate`}
+        />
       </div>
     </div>
+  </div>
+  
   )
 }
 

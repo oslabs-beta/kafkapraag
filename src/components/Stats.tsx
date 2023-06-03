@@ -10,10 +10,8 @@ type StatsProps = {
 
 const Stats: React.FC<StatsProps> = ({totalTopics, totalPartitions, offlinePartitions, totalBrokers, offlineBrokers}) => {
 
-
-
 return (
-  <div className="stats shadow">
+  <div className="flex justify-center stats" >
   
     <div className="stat">
       <div className="stat-figure text-secondary">
@@ -54,7 +52,6 @@ return (
       <div className="stat-title">Offline Brokers</div>
       <div className="stat-value">{offlineBrokers}</div>
     </div>
-  
 </div>
 )
 }
