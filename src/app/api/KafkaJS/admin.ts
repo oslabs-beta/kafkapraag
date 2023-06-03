@@ -1,3 +1,4 @@
+// cluster must be externally connected, and connected to applicaton via KafkaJS
 import { Kafka } from 'kafkajs'
 
 const kafka = new Kafka({
