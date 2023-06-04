@@ -1,17 +1,14 @@
 'use client'
-import React, { useState, createContect } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
-const BrokerAddress: React.FC = () => {
-  // const Context = createContext();
+interface AddressInputProps {
+  setBrokers: Dispatch<SetStateAction<string[]>>
+};
 
-  const [hostAddress, setHostAddress] = useState('');
-
+const AddressInput: React.FC<AddressInputProps> = ({ setBrokers }) => {
   const handleSubmit = () => {
-    // Perform any necessary actions with the hostAddress state
-    console.log(hostAddress);
-
     // Clear the input field
-    setHostAddress('');
+    setBrokers('')
   };
 
   return ( 
@@ -26,8 +23,7 @@ const BrokerAddress: React.FC = () => {
             type="text"
             placeholder="Type here"
             className="flex items-center input input-bordered input-primary w-full max-w-xs"
-            value={hostAddress}
-            onChange={(event) => setHostAddress(event.target.value)}
+            onChange={(event) => setBrokers(event.target.value)}
           />
 
           <div className="modal-action">
@@ -37,7 +33,7 @@ const BrokerAddress: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BrokerAddress;
+export default AddressInput

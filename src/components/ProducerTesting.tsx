@@ -1,21 +1,24 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-const ProducerTesting: React.FC = () => {
+interface ProducerTestingProps {
+  brokers: string[]
+}
+
+const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
   const [producersList, setProducersList] = useState([])
   const [dropDown, setDropDown] = useState('DEFAULT')
 
   const [producerName, setProducerName] = useState('')
   const [messagesPerSecond, setMessagesPerSecond] = useState('')
 
-  const [brokers,setBrokers] = useState('localhost:9092')
   // Currently using default values for testing, need dynamic values
   // const [brokers, setBrokers] = useState(['localhost:9092'])
   // const [clientId, setClientId] = useState('kafkajs-producer1')
   // Change these from hardcoded values to useState when adding feature to choose cluster connection
   // const brokers = ['localhost:9092']
   const clientId = 'kafkajs-producer1'
-
+  console.log('brokers', brokers)
   const handleProducerNameInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setProducerName(e.target.value)
   }
@@ -122,12 +125,12 @@ const ProducerTesting: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col items-center  ">
+    <div className="flex flex-col justify-center items-center">
       <p className="text-2xl mb-7">Producer Testing</p>
 
-      <div className="flex flex-col md:flex-row md:justify-center items-center max-w-[800px]">
+      <div className="flex flex-col md:flex-row md:justify-center items-center w-full md:max-w-[800px]">
 
-        <input
+      <input
           value={producerName}
           onChange={handleProducerNameInputChange}
           type="text"
@@ -162,7 +165,7 @@ const ProducerTesting: React.FC = () => {
       <div className="flex flex-col md:flex-row justify-center items-center max-w-[800px]">
         <button
           onClick={handleStopButtonClick}
-          className="btn btn-primary bg-red-700 hover:bg-red-800 text-white m-2 w-[200px]"
+          className="btn bg-gray-600 hover:bg-red-800 text-white m-2 w-[200px]"
         >
           Stop Producer
         </button>
