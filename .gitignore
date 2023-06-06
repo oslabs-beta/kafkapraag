@@ -34,9 +34,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-<<<<<<< HEAD
-package-lock.json
-=======
 # package-lock.json for development
 package-lock.json
 
@@ -44,4 +41,3 @@ package-lock.json
 /jolokia
 
 test_env
->>>>>>> 1cfdd8b85f3dc5d61bb29b94b70f3043df8802c0
