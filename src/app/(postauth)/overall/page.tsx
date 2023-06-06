@@ -146,7 +146,7 @@ const OverallMetrics: React.FC = () => {
             newCOMR.shift()
             newCOMR.push({
               x: curTime,
-              y: consumerOMR +1.5
+              y: consumerOMR + 1.5
             })
             return newCOMR
           })
@@ -173,6 +173,8 @@ const OverallMetrics: React.FC = () => {
   }, [])
 
   return (
+    // need to change css to dynamically adjust min/max widths
+    // also needs to dynamically update producer drop down options upon change of cluster address
     <div className="mx-10 my-5">
 
     <p className="text-center text-3xl md:text-4xl">Dashboard</p>
