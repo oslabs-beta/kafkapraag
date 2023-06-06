@@ -15,7 +15,6 @@ const options = {}
 
 const client = new MongoClient(uri, options)
 const clientPromise: Promise<MongoClient> = client.connect()
-
 console.log('Pinged your deployment. You successfully connected to MongoDB!')
 
 export default clientPromise
