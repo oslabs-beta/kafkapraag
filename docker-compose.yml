@@ -42,3 +42,5 @@ services:
       - 3000:3000
     depends_on:
       - kafka-broker-1
+    volumes:
+      - ./.env.development:./usr/src/app/.env.production

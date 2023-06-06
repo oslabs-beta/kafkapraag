@@ -26,6 +26,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env.development
 
 # vercel
 .vercel
@@ -36,3 +37,8 @@ next-env.d.ts
 
 # package-lock.json for development
 package-lock.json
+
+# Jolokia JVM agent
+/jolokia
+
+test_env
