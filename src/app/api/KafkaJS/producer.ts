@@ -1,3 +1,4 @@
+// cluster must be externally connected, and connected to applicaton via KafkaJS
 import { Kafka, type Message, type Producer } from 'kafkajs'
 
 // Creates a single producer, used in ProducerList

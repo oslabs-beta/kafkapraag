@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect } from 'react'
 import GraphTemplate from '@components/GraphTemplate'
 import ProducerTesting from '@components/ProducerTesting'
 import Stats from '@components/Stats'
@@ -15,16 +15,16 @@ const OverallMetrics: React.FC = () => {
   // for (let i = 0; i < 20; i++) {
   //   dataPoints.push({x: `${i}`, y: 0, count: 0, timestamp: Date.now()});
   // }
-  const [ mtm, setMtm ] = useState(dataPoints);
-  const [ producerOMR, setProducerOMR ] = useState(dataPoints);
-  const [ fproducerOMR, setfProducerOMR ] = useState(dataPoints);
-  const [ consumerOMR, setConsumerOMR ] = useState(dataPoints);
-  const [ fconsumerOMR, setfConsumerOMR ] = useState(dataPoints);
-  const [ totalTopics, setTotalTopics ] = useState(10);
-  const [ totalPartitions, setTotalPartitions ] = useState(10);
-  const [ offlinePartitions, setOfflinePartitions ] = useState(10);
-  const [ totalBrokers, setTotalBrokers ] = useState(10);
-  const [ offlineBrokers, setOfflineBrokers ] = useState(10);
+  const [mtm, setMtm] = useState(dataPoints)
+  const [producerOMR, setProducerOMR] = useState(dataPoints)
+  const [fproducerOMR, setfProducerOMR] = useState(dataPoints)
+  const [consumerOMR, setConsumerOMR] = useState(dataPoints)
+  const [fconsumerOMR, setfConsumerOMR] = useState(dataPoints)
+  const [totalTopics, setTotalTopics] = useState(10)
+  const [totalPartitions, setTotalPartitions] = useState(10)
+  const [offlinePartitions, setOfflinePartitions] = useState(10)
+  const [totalBrokers, setTotalBrokers] = useState(10)
+  const [offlineBrokers, setOfflineBrokers] = useState(10)
 
   const [tickCache, setTickCache] = useState<string[]>(['', ''])
 
@@ -177,9 +177,7 @@ const OverallMetrics: React.FC = () => {
 
     <p className="text-center text-3xl md:text-4xl">Dashboard</p>
     <div className="grid grid-col-1 md:grid-col-5 gap-4 items-center mt-5">
-      <Suspense fallback={<Loading />}>
         <ProducerTesting brokers = {brokers}/>
-      </Suspense>
     </div>
     <div className="mt-4 md:mt-8">
       <Stats
@@ -231,7 +229,3 @@ const OverallMetrics: React.FC = () => {
 }
 
 export default OverallMetrics
-
-function Loading() {
-  return <h2>🌀 Loading...</h2>
-}

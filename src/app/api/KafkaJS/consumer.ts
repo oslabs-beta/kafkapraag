@@ -1,3 +1,4 @@
+// cluster must be externally connected, and connected to applicaton via KafkaJS
 import { Kafka, type Consumer } from 'kafkajs'
 
 interface Settings {
@@ -13,33 +14,20 @@ interface startConsumerReturn {
   stopConsumer: () => Promise<void>
 }
 
-/*
-const settings = {
-  clientId: "my-app",
-  brokers: ["127.0.0.1:9092"],
-  groupId: "test-group",
-  topic: "topic1",
-  fromBeginning: true
-}
-*/
-
 const NewConsumer = (): startConsumerReturn => {
   let consumer: null | Consumer = null
 
   const startConsumer = async ({ clientId, brokers, groupId, topic, fromBeginning = false }: Settings): Promise<void> => {
-    // Connect to Kafka cluster
     const kafka = new Kafka({
       clientId,
       brokers
     })
-    // Create a new consumer
+
     consumer = kafka.consumer({ groupId })
-    // Connect the newly created consumer
     await consumer.connect()
     /* Subscribe to a particular topic. If fromBeginning is true, display messages
     from beginning of log. Else only display messages after current time */
     await consumer.subscribe({ topic, fromBeginning })
-    // Perform the following action for each message consumed from topic
     await consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
         console.log({
@@ -55,7 +43,6 @@ const NewConsumer = (): startConsumerReturn => {
   const stopConsumer: () => Promise<void> = async () => {
     await consumer?.disconnect()
   }
-
   return { startConsumer, stopConsumer }
 }
 
