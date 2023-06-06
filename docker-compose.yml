@@ -37,10 +37,10 @@ services:
   
   kafkapraag:
     container_name: kafkapraag
-    image: praag:latest
+    image: praag/kafkapraag:latest
     ports:
       - 3000:3000
     depends_on:
       - kafka-broker-1
     volumes:
-      - ./.env.development:./usr/src/app/.env.production
+      - ./.env.development:/usr/src/app/.env.production
