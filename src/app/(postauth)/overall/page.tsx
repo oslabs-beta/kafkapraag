@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import GraphTemplate from '@components/GraphTemplate'
 import ProducerTesting from '@components/ProducerTesting'
 import Stats from '@components/Stats'
-import { TextSize } from 'victory'
+// import { TextSize } from 'victory'
 import AddressInput from '@components/AddressInput'
 
 const OverallMetrics: React.FC = () => {
@@ -146,7 +146,7 @@ const OverallMetrics: React.FC = () => {
             newCOMR.shift()
             newCOMR.push({
               x: curTime,
-              y: consumerOMR + 1.5
+              y: parseInt(consumerOMR) + 1.5
             })
             return newCOMR
           })
@@ -173,7 +173,7 @@ const OverallMetrics: React.FC = () => {
   }, [])
 
   return (
-    // need to change css to dynamically adjust min/max widths
+    // need to change css to dynamically adjust min/max width
     // also needs to dynamically update producer drop down options upon change of cluster address
     <div className="mx-10 my-5">
 
