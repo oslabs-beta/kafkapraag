@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, createContext, useContext } from 'react'
 import Image from 'next/image'
 import logo from 'src/assets/kafkaPRAAG-logo-transparent.png'
 // import { getProviders, signIn, signOut } from 'next-auth/react'
@@ -9,6 +9,8 @@ import { signOut } from 'next-auth/react'
 interface NavProps {
   children: React.ReactNode
 }
+
+const Context = createContext('mytheme')
 
 const Nav: React.FC<NavProps> = ({ children }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -23,13 +25,16 @@ const Nav: React.FC<NavProps> = ({ children }) => {
     })
   }
 
+  const svgLight = 'black'
+  const svgDark = 'white'
+
   return (
     <>
       <div className="drawer drawer-mobile">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* <!-- Navbar --> */}
-          <div className="w-full navbar base-100">
+          <div className="w-full navbar bg-base-100">
             <div className="flex-none lg:hidden">
               <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -41,7 +46,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
                 <Image
                   src={logo}
                   alt="kafkaPRAAG logo"
-                  width={90}
+                  width={200}
                   // height={70}
                 />
                 </div>
@@ -63,11 +68,13 @@ const Nav: React.FC<NavProps> = ({ children }) => {
             </div>
           </div>
           {/* <!-- Page content here --> */}
-          {children}
+          <Context.Provider value={theme}>
+            {children}
+          </Context.Provider>
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-          <div className="w-80">
+          <div className="w-80 bg-base-100">
             <div className="z-20 sticky top-0 items-center gap-2 px-4 py-2 hidden lg:flex ">
               <Link className="flex-0 btn btn-ghost px-2 hover:bg-inherit" href="/">
                 <div className="font-title hover:bg-inherit text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
@@ -83,7 +90,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
             </div>
             <ul className="menu p-4 flex flex-col font-light text-lg">
               {/* <!-- Sidebar content here --> */}
-              <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit font-medium text-lg" href="/overall"><svg fill="#000000" height="32px" width="32px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+              <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit font-medium text-lg" href="/overall"><svg fill={theme === 'dark' ? svgDark : svgLight} height="32px" width="32px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -91,7 +98,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
                 </g>
               </svg>
               Overall Metrics</Link></li>
-                            <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit" href="/brokers"><svg fill="#000000" height="32px" width="32px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit" href="/brokers"><svg fill={theme === 'dark' ? svgDark : svgLight} height="32px" width="32px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -99,7 +106,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
                 </g>
               </svg>
               Broker Metrics</Link></li>
-                            <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit" href="/producers"><svg fill="#000000" height="32px" width="32px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit" href="/producers"><svg fill={theme === 'dark' ? svgDark : svgLight} height="32px" width="32px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -107,7 +114,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
                 </g>
               </svg>
               Producer Metrics</Link></li>
-                            <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit" href="/topics"><svg fill="#000000" height="32px" width="32px" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit" href="/topics"><svg fill={theme === 'dark' ? svgDark : svgLight} height="32px" width="32px" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -116,7 +123,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
                 </g>
               </svg>
               Topic Metrics</Link></li>
-                            <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit" href="/topicsnames"><svg fill="#000000" height="32px" width="32px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit" href="/topicsnames"><svg fill={theme === 'dark' ? svgDark : svgLight} height="32px" width="32px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -124,7 +131,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
                 </g>
               </svg>
               Topic Names</Link></li>
-                            <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit" href="/testing"><svg fill="#000000" height="32px" width="32px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            <li className="hover:text-primary hover:bg-inherit " ><Link className="hover:bg-inherit" href="/testing"><svg fill={theme === 'dark' ? svgDark : svgLight} height="32px" width="32px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -132,7 +139,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
                 </g>
               </svg>
               Cluster Testing</Link></li>
-              <li className="hover:text-primary hover:bg-inherit mt-40 sm:mt-64 text-slate-500 font-light"><button onClick={(e) => {
+              <li className="hover:text-primary hover:bg-inherit m-20 absolute bottom-0 sm:mt-64 font-light"><button onClick={(e) => {
                 signOut({ callbackUrl: 'http://localhost:3000' })
                   .catch((err) => { console.log(err) })
               }}>Logout</button></li>
@@ -143,5 +150,7 @@ const Nav: React.FC<NavProps> = ({ children }) => {
     </>
   )
 }
+
+export const useThemeContext = (): string => useContext(Context)
 
 export default Nav
