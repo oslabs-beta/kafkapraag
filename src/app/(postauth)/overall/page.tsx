@@ -173,7 +173,7 @@ const OverallMetrics: React.FC = () => {
   }, [])
 
   return (
-    // need to change css to dynamically adjust min/max widths
+    // need to change css to dynamically adjust min/max width
     // also needs to dynamically update producer drop down options upon change of cluster address
     <div className="mx-10 my-5">
 
