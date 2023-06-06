@@ -6,29 +6,22 @@ interface AddressInputProps {
 };
 
 const AddressInput: React.FC<AddressInputProps> = ({ setBrokers }) => {
-  const handleSubmit = () => {
-    // Clear the input field
-    setBrokers('')
-  };
-
-  return ( 
+  return (
     <div>
-      <label htmlFor="my_modal_6" className="btn">Change cluster address</label>
+      <label htmlFor="my_modal_6" className="btn btn-primary">Change cluster address</label>
 
       <input type="checkbox" id="my_modal_6" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box">
-          <label htmlFor="text" className="text-lg">Input Cluster Host Address:</label>
+        <div className="modal-box flex flex-col items-center gap-2">
+          <label htmlFor="text" className="text-xl">Input Cluster Host Address:</label>
           <input
             type="text"
-            placeholder="Type here"
+            placeholder="Your Cluster Address"
             className="flex items-center input input-bordered input-primary w-full max-w-xs"
-            onChange={(event) => setBrokers(event.target.value)}
+            onChange={(event) => { setBrokers([event.target.value]) }}
           />
-
           <div className="modal-action">
-            <button onClick={handleSubmit} className="btn">Submit</button>
-            <label htmlFor="my_modal_6" className="btn modal-close">Close</label>
+            <label htmlFor="my_modal_6" className="btn btn-primary modal-close">Confirm</label>
           </div>
         </div>
       </div>

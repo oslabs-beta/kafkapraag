@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import GraphTemplate from '@components/GraphTemplate'
 import ProducerTesting from '@components/ProducerTesting'
 import Stats from '@components/Stats'
@@ -173,10 +173,13 @@ const OverallMetrics: React.FC = () => {
   }, [])
 
   return (
-    <div className="mx-auto p-4 md:p-10">
+    <div className="mx-10 my-5">
+
     <p className="text-center text-3xl md:text-4xl">Dashboard</p>
-    <div className="flex justify-center items-center mt-6">
-      <ProducerTesting brokers = {brokers}/>
+    <div className="grid grid-col-1 md:grid-col-5 gap-4 items-center mt-5">
+      <Suspense fallback={<Loading />}>
+        <ProducerTesting brokers = {brokers}/>
+      </Suspense>
     </div>
     <div className="mt-4 md:mt-8">
       <Stats
@@ -187,8 +190,8 @@ const OverallMetrics: React.FC = () => {
         offlineBrokers={offlineBrokers}
       />
     </div>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap- mt-4 text-base md:text-lg">
-        <div className="text-2xl md:text-3xl">
+    <div className="grid grid-cols-1 md:grid-cols-3  mt-4 text-base md:text-lg">
+        <div>
           <GraphTemplate
             datapoints={mtm}
             fdatapoints={[{ x: '0', y: 0 }]}
@@ -196,7 +199,7 @@ const OverallMetrics: React.FC = () => {
             title={'Messages per Second'}
           />
         </div>
-        <div className="">
+        <div>
           <GraphTemplate
             datapoints={producerOMR}
             fdatapoints={fproducerOMR}
@@ -204,7 +207,7 @@ const OverallMetrics: React.FC = () => {
             title={'Producer Request Rate'}
           />
         </div>
-        <div className="">
+        <div>
           <GraphTemplate
             datapoints={consumerOMR}
             fdatapoints={fconsumerOMR}
@@ -213,8 +216,14 @@ const OverallMetrics: React.FC = () => {
           />
         </div>
       </div>
-      <div className="mt-4">
-        <AddressInput setBrokers = {setBrokers}/>
+
+      <div className="flex flex-col gap-2 my-4 md:flex-row md:justify-center md:items-center">
+
+        <div className="alert alert-gray-200">
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <p className='text-lg'>Current Cluster Address: {brokers}</p>
+          <AddressInput setBrokers = {setBrokers}/>
+        </div>
       </div>
     </div>
 
@@ -222,3 +231,7 @@ const OverallMetrics: React.FC = () => {
 }
 
 export default OverallMetrics
+
+function Loading() {
+  return <h2>🌀 Loading...</h2>
+}

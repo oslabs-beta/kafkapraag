@@ -18,7 +18,7 @@ const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, 
   const chartTitle = `${title} : ${Math.round(datapoints[datapoints.length - 1].y)}`
 
   return (
-    <div className="h-auto w-auto">
+    <div className="h-auto w-auto ">
       <VictoryChart>
           <VictoryLabel
             text= {chartTitle}

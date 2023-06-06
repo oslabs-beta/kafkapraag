@@ -12,7 +12,7 @@ interface NavProps {
 
 const Nav: React.FC<NavProps> = ({ children }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [theme, setTheme] = useState('garden')
+  const [theme, setTheme] = useState('mytheme')
 
   const swapTheme = (): void => {
     setTheme((prevTheme) => {
