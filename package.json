@@ -28,6 +28,7 @@
 		"react": "18.2.0",
 		"react-chartjs-2": "^5.2.0",
 		"react-dom": "18.2.0",
+		"sharp": "^0.32.1",
 		"socket.io-client": "^4.6.2",
 		"tailwindcss": "3.3.2",
 		"victory": "^36.6.10",
