@@ -1,19 +1,24 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-const ProducerTesting: React.FC = () => {
+interface ProducerTestingProps {
+  brokers: string[]
+}
+
+const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
   const [producersList, setProducersList] = useState([])
   const [dropDown, setDropDown] = useState('DEFAULT')
 
   const [producerName, setProducerName] = useState('')
   const [messagesPerSecond, setMessagesPerSecond] = useState('')
+
   // Currently using default values for testing, need dynamic values
   // const [brokers, setBrokers] = useState(['localhost:9092'])
   // const [clientId, setClientId] = useState('kafkajs-producer1')
   // Change these from hardcoded values to useState when adding feature to choose cluster connection
-  const brokers = ['localhost:9092']
+  // const brokers = ['localhost:9092']
   const clientId = 'kafkajs-producer1'
-
+  console.log('brokers', brokers)
   const handleProducerNameInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setProducerName(e.target.value)
   }
@@ -120,20 +125,51 @@ const ProducerTesting: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <p className="text-2xl font-extralight mb-7">Generate producers:</p>
-      <div className="flex flex-col md:flex-row md:justify-end items-center w-[600px] md:w-[800px]">
-        <input value={producerName} onChange={handleProducerNameInputChange} type="text" placeholder="Producer name" className="placeholder:italic input m-2" />
-        <input value={messagesPerSecond} onChange={handleMessagesPerSecondInputChange} type="number" placeholder="Messages/second" className="placeholder:italic input m-2" />
-        <button onClick={handleStartButtonClick} className="btn btn-outline btn-primary m-2 w-[200px]">Start Producer</button>
+    <div className="flex flex-col justify-center items-center">
+      <p className="text-2xl mb-7">Producer Testing</p>
+
+      <div className="flex flex-col md:flex-row md:justify-center items-center w-full md:max-w-[800px]">
+
+      <input
+          value={producerName}
+          onChange={handleProducerNameInputChange}
+          type="text"
+          placeholder="Producer name"
+          className="input input-bordered w-[200px] md:w-[300px] m-2"
+      />
+
+      <input
+        value={messagesPerSecond}
+        onChange={handleMessagesPerSecondInputChange}
+        type="number"
+        placeholder="Messages/second"
+        className="input input-bordered w-[200px] md:w-[300px] m-2"
+      />
+
+      <select
+        value={dropDown}
+        onChange={handleProducerSelect}
+        className="select select-bordered w-[200px] md:w-[276px] m-2"
+      >
+      <option value="DEFAULT" disabled>Select a producer:</option>
+      {producersList}
+      </select>
+
+      <button
+        onClick={handleStartButtonClick}
+        className="btn btn-primary m-2 w-[200px] text-white"
+      >
+        Start Producer
+      </button>
+
+      <div className="flex flex-col md:flex-row justify-center items-center max-w-[800px]">
+        <button
+          onClick={handleStopButtonClick}
+          className="btn bg-gray-600 hover:bg-red-800 text-white m-2 w-[200px]"
+        >
+          Stop Producer
+        </button>
       </div>
-      <div className="my-5 md:hidden"></div>
-      <div className="flex flex-col md:flex-row justify-end items-center w-[600px] md:w-[800px]">
-        <select value={dropDown} onChange={handleProducerSelect} className="select m-2">
-          <option value="DEFAULT" disabled>Select a producer:</option>
-          {producersList}
-        </select>
-        <button onClick={handleStopButtonClick} className="btn btn-outline btn-error hover:bg-red-800 text-red-100 m-2 w-[200px]">Stop Producer</button>
       </div>
     </div>
 
