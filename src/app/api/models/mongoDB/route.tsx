@@ -6,11 +6,11 @@ export async function GET (): Promise<NextResponse> {
   return NextResponse.json({ hello: 'hello there!' })
 }
 
-if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
-}
+// if (!process.env.MONGODB_URI) {
+//   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
+// }
 
-const uri = process.env.MONGODB_URI
+const uri = process.env.MONGODB_URI || 'mongodb://test'
 const options = {}
 
 const client = new MongoClient(uri, options)
