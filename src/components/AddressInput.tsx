@@ -1,5 +1,5 @@
 'use client'
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { type Dispatch, type SetStateAction } from 'react'
 
 interface AddressInputProps {
   setBrokers: Dispatch<SetStateAction<string[]>>
