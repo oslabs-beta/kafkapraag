@@ -1,0 +1,46 @@
+version: '3'
+services:
+  kafka-zookeeper-1:
+    container_name: kafka-zookeeper-1
+    image: ubuntu/zookeeper:latest
+    ports:
+      - 2181:2181
+    environment:
+      - TZ=UTC
+      - ZOOKEEPER_CLIENT_PORT=2181
+  
+  kafka-broker-1:
+    container_name: kafka-broker-1
+    image: ubuntu/kafka:latest
+    ports:
+      - 9092:9092
+      - 8778:8778
+    depends_on:
+      - kafka-zookeeper-1
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=kafka-zookeeper-1:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-broker-1:9092,PLAINTEXT_HOST://localhost:9092
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_JMX_OPTS=-javaagent:/usr/src/app/jolokia.jar=port=8778,host=0.0.0.0
+        -Dcom.sun.management.jmxremote=true
+        -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.ssl=false
+        -Djava.rmi.server.hostname=localhost
+        -Dcom.sun.management.jmxremote.host=localhost
+        -Dcom.sun.management.jmxremote.port=9999
+        -Dcom.sun.management.jmxremote.rmi.port=9999
+        -Djava.net.preferIPv4Stack=true
+    volumes:
+      - ./jolokia:/usr/src/app
+  
+  kafkapraag:
+    container_name: kafkapraag
+    image: praag/kafkapraag:latest
+    ports:
+      - 3000:3000
+    depends_on:
+      - kafka-broker-1
+    volumes:
+      - ./.env.development:/usr/src/app/.env.production

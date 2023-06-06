@@ -33,3 +33,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# package-lock.json for development
+package-lock.json
+
+# Jolokia JVM agent
+/jolokia
+
+test_env
