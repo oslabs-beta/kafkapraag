@@ -1,5 +1,5 @@
 'use client'
-import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from 'victory'
+import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel, VictoryArea } from 'victory'
 
 interface Datapoint {
   x: string
@@ -18,17 +18,20 @@ const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, 
   const chartTitle = `${title} : ${Math.round(datapoints[datapoints.length - 1].y)}`
 
   return (
-    <div className="h-auto w-[750px] bg-white rounded-m p-2">
+    <div className="h-auto w-auto ">
       <VictoryChart>
-        <VictoryLabel
-          text= {chartTitle}
-          x={48} // Adjust the x-coordinate to position the label horizontally
-          y={30} // Adjust the y-coordinate to position the label vertically
-          // textAnchor="middle"  // Set textAnchor to "middle" for center alignment
-        />
+          <VictoryLabel
+            text= {chartTitle}
+            style={{
+              fontSize: 20
+            }}
+            x={48} // Adjust the x-coordinate to position the label horizontally
+            y={30} // Adjust the y-coordinate to position the label vertically
+            // textAnchor="middle"  // Set textAnchor to "middle" for center alignment
+          />
         <VictoryLine
           style={{
-            data: { stroke: '#570DF8' },
+            data: { stroke: '#c026d3' },
             parent: { border: '1px solid #ccc' }
           }}
           data={datapoints}
@@ -43,6 +46,16 @@ const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, 
           data={fdatapoints}
           domain={{ y: [0, 10] }}
           interpolation="basis"
+        />
+
+        <VictoryArea
+            data={datapoints}
+            style={{
+              data: {
+                strokeWidth: 0,
+                fill: 'rgba(192, 38, 211, .1)'
+              }
+            }}
         />
         <VictoryAxis crossAxis
           tickFormat={

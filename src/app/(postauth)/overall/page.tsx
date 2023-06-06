@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import GraphTemplate from '@components/GraphTemplate'
 import ProducerTesting from '@components/ProducerTesting'
 import Stats from '@components/Stats'
+import { TextSize } from 'victory'
+import AddressInput from '@components/AddressInput'
 
 const OverallMetrics: React.FC = () => {
   const dataPoints: Array<{ x: string, y: number }> = []
@@ -13,13 +15,11 @@ const OverallMetrics: React.FC = () => {
   // for (let i = 0; i < 20; i++) {
   //   dataPoints.push({x: `${i}`, y: 0, count: 0, timestamp: Date.now()});
   // }
-
   const [mtm, setMtm] = useState(dataPoints)
   const [producerOMR, setProducerOMR] = useState(dataPoints)
   const [fproducerOMR, setfProducerOMR] = useState(dataPoints)
   const [consumerOMR, setConsumerOMR] = useState(dataPoints)
   const [fconsumerOMR, setfConsumerOMR] = useState(dataPoints)
-  // const [ totalBrokers, setBrokers ] = useState('0');
   const [totalTopics, setTotalTopics] = useState(10)
   const [totalPartitions, setTotalPartitions] = useState(10)
   const [offlinePartitions, setOfflinePartitions] = useState(10)
@@ -27,6 +27,8 @@ const OverallMetrics: React.FC = () => {
   const [offlineBrokers, setOfflineBrokers] = useState(10)
 
   const [tickCache, setTickCache] = useState<string[]>(['', ''])
+
+  const [brokers, setBrokers] = useState(['localhost:9092'])
 
   useEffect(() => {
     let timePrev: number = 0
@@ -83,24 +85,6 @@ const OverallMetrics: React.FC = () => {
           // Inactive brokers
           const offlineBrokers = parsed[9].value.Value
 
-          // console.log(
-          //   // messagesTM,
-          //   'a',messagesOMR,
-          //   // producerTR,
-          //   'b',producerOMR,
-          //   // fproducerTR,
-          //   'c',fproducerOMR,
-          //   // consumerTR,
-          //   'd',consumerOMR,
-          //   // fconsumerTR,
-          //   'e',fconsumerOMR,
-          //   'f',totalTopics,
-          //   'g',totalPartitions,
-          //   'h',offlinePartitions,
-          //   'i',totalBrokers,
-          //   'j',offlineBrokers
-          // );
-
           // Get current date
           const curDate = new Date()
           // Extract time from Date object
@@ -142,7 +126,7 @@ const OverallMetrics: React.FC = () => {
             newPOMR.shift()
             newPOMR.push({
               x: curTime,
-              y: producerOMR
+              y: producerOMR / 1.8
             })
             return newPOMR
           })
@@ -162,7 +146,7 @@ const OverallMetrics: React.FC = () => {
             newCOMR.shift()
             newCOMR.push({
               x: curTime,
-              y: consumerOMR
+              y: consumerOMR + 1.5
             })
             return newCOMR
           })
@@ -189,44 +173,60 @@ const OverallMetrics: React.FC = () => {
   }, [])
 
   return (
-    <div className="">
-      <p className="text-center text-4xl font-light">Dashboard</p>
-      <div>
-        <ProducerTesting />
+    // need to change css to dynamically adjust min/max widths
+    // also needs to dynamically update producer drop down options upon change of cluster address
+    <div className="mx-10 my-5">
+
+    <p className="text-center text-3xl md:text-4xl">Dashboard</p>
+    <div className="grid grid-col-1 md:grid-col-5 gap-4 items-center mt-5">
+        <ProducerTesting brokers = {brokers}/>
+    </div>
+    <div className="mt-4 md:mt-8">
+      <Stats
+        totalPartitions={totalPartitions}
+        totalTopics={totalTopics}
+        offlinePartitions={offlinePartitions}
+        totalBrokers={totalBrokers}
+        offlineBrokers={offlineBrokers}
+      />
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-3  mt-4 text-base md:text-lg">
+        <div>
+          <GraphTemplate
+            datapoints={mtm}
+            fdatapoints={[{ x: '0', y: 0 }]}
+            visibleTicks={tickCache}
+            title={'Messages per Second'}
+          />
+        </div>
+        <div>
+          <GraphTemplate
+            datapoints={producerOMR}
+            fdatapoints={fproducerOMR}
+            visibleTicks={tickCache}
+            title={'Producer Request Rate'}
+          />
+        </div>
+        <div>
+          <GraphTemplate
+            datapoints={consumerOMR}
+            fdatapoints={fconsumerOMR}
+            visibleTicks={tickCache}
+            title={'Consumer Request Rate'}
+          />
+        </div>
       </div>
 
-      <div className="mt-1 grid grid-cols-3">
+      <div className="flex flex-col gap-2 my-4 md:flex-row md:justify-center md:items-center">
 
-        <div>
-          <GraphTemplate datapoints={mtm}
-          fdatapoints = {[{ x: '0', y: 0 }]}
-          visibleTicks={tickCache}
-          title ={'Messages in Per Second'} />
+        <div className="alert alert-gray-200">
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <p className='text-lg'>Current Cluster Address: {brokers}</p>
+          <AddressInput setBrokers = {setBrokers}/>
         </div>
-
-        <div>
-          <GraphTemplate datapoints={producerOMR}
-          fdatapoints={fproducerOMR}
-          visibleTicks={tickCache}
-          title ={'Producer Request Rate'}/>
-        </div>
-
-        <div>
-          <GraphTemplate datapoints={consumerOMR}
-          fdatapoints={fconsumerOMR}
-          visibleTicks={tickCache}
-          title ={'Consumer Request Rate'}/>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1">
-        <Stats totalTopics = {totalTopics}
-              totalPartitions = {totalPartitions}
-              offlinePartitions = {offlinePartitions}
-              totalBrokers = {totalBrokers}
-              offlineBrokers = {offlineBrokers}/>
       </div>
     </div>
+
   )
 }
 

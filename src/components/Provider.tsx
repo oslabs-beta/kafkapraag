@@ -1,5 +1,5 @@
 'use client'
-
+// SessionProvider component stores user authentication globally
 import { SessionProvider } from 'next-auth/react'
 
 interface RootLayoutProps {
