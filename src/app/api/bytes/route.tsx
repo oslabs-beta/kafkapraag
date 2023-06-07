@@ -5,6 +5,5 @@ export async function GET (): Promise<NextResponse> {
   const byteIn = await response.json()
   const bytes: number = byteIn.value.OneMinuteRate
   const count: number = byteIn.value.Count
-  console.log(byteIn)
   return NextResponse.json({ OneMinuteBytesInRate: bytes, Count: count })
 }

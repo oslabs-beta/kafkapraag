@@ -60,7 +60,7 @@ class DummyProducer {
   }
 }
 
-// Allows dynamically starting/sending messages from/stopping multiple producers.
+// Dynamically start/send message from and/or stop producers.
 export default class ProducerList {
   private producers: Record<string, DummyProducer>
 
@@ -70,7 +70,7 @@ export default class ProducerList {
 
   public async startProducer (producerName: string, interval: number, clientId: string, brokers: string[]): Promise<boolean> {
     try {
-      // If user entered a name for a producer that already exists
+      // If user enters a name for a producer that already exists
       if (Object.hasOwn(this.producers, producerName)) {
         throw new Error('Producer name already exists, choose new producer name.')
       }
@@ -87,7 +87,7 @@ export default class ProducerList {
 
   public async sendMessage (producerName: string, topic: string, messages: Message[] = [{ value: `Hello, this is a message from ${producerName}` }]): Promise<void> {
     try {
-      // Check if producer exists, if not throw error
+      // Check if producer exists
       if (!Object.hasOwn(this.producers, producerName)) {
         throw new Error('Producer does not exist.')
       }
@@ -100,13 +100,12 @@ export default class ProducerList {
 
   public async stopProducer (producerName: string): Promise<void> {
     try {
-      // Check if producer exists, if not throw error
+      // Check if producer exists
       if (!Object.hasOwn(this.producers, producerName)) {
         throw new Error('Producer does not exist.')
       }
-      // Disconnect producer
+      // Disconnect & delete producer
       await this.producers[producerName].stop()
-      // Delete producer from cache
       // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete this.producers[producerName]
     } catch (error) {

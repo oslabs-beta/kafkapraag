@@ -10,21 +10,8 @@ const TopicsNames: React.FC = () => {
         .then(async data => await data.json())
         .then(data => {
           const filteredData = data.topics.filter((topic: string) => topic !== '__consumer_offsets')
-
           const tableElements = []
           for (let i = 0; i < filteredData.length; i++) {
-            // const row = document.createElement('tr');
-            // const num = document.createElement('th');
-            // const topicName = document.createElement('td');
-
-            // row.append(num);
-            // row.append(topicName);
-
-            // num.textContent = (i+1).toString();
-            // topicName.textContent = filteredData[i];
-
-            // tableElements.push(row);
-
             const row = (
                         <tr>
                           <th>{i + 1}</th>
@@ -33,19 +20,14 @@ const TopicsNames: React.FC = () => {
             )
             tableElements.push(row)
           }
-          // setTable([tableElements]);
-          console.log('tableElements', tableElements)
-
           setTable(tableElements)
-          // consolelog doesnt reflect since it's async?
-          // console.log('tabled', tabled)
         })
         .catch((err) => { console.log(err) })
     }, 1000)
     return () => { clearInterval(interval) }
   }, [])
   return (
-        <div className="overflow-x-auto">
+        <section className="overflow-x-auto">
             <table className="table table-zebra w-full">
                 {/* head */}
                 <thead>
@@ -56,15 +38,9 @@ const TopicsNames: React.FC = () => {
                 </thead>
                 <tbody>
                     {tabled}
-
-                    {/* row 1 */}
-                    {/* <tr>
-                        <th>1</th>
-                        <td>Cy Ganderton</td>
-                    </tr> */}
                 </tbody>
             </table>
-            </div>
+        </section>
   )
 }
 

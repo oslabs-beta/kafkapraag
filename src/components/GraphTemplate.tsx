@@ -20,7 +20,7 @@ const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, 
   const theme = useThemeContext()
 
   return (
-    <div className="h-auto w-auto">
+    <section className="h-auto w-auto">
       <VictoryChart>
           <VictoryLabel
             text= {chartTitle}
@@ -102,7 +102,7 @@ const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, 
           }}
         />
       </VictoryChart>
-    </div>
+    </section>
   )
 }
 

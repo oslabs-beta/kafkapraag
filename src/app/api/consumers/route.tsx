@@ -6,7 +6,6 @@ const consumer = NewConsumer()
 export async function POST (req: Request, res: Response): Promise<NextResponse> {
   console.log('Hit consumer POST route')
   const data = await req.json()
-  console.log(data)
   await consumer.startConsumer(data)
   return NextResponse.json({ message: 'Consumer started.' })
 }
