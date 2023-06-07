@@ -128,48 +128,48 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
     <div className="flex flex-col justify-center items-center">
       <p className="text-2xl mb-7">Producer Testing</p>
 
-      <div className="flex flex-col md:flex-row md:justify-center items-center w-full md:max-w-[800px]">
+      <div className="flex flex-col md:flex-wrap md:flex-row xl:flex-nowrap xl:flex-row xl:justify-center items-center w-full md:max-w-[800px]">
 
-      <input
-          value={producerName}
-          onChange={handleProducerNameInputChange}
-          type="text"
-          placeholder="Producer name"
+        <input
+            value={producerName}
+            onChange={handleProducerNameInputChange}
+            type="text"
+            placeholder="Producer name"
+            className="input input-bordered w-[200px] md:w-[300px] m-2"
+        />
+
+        <input
+          value={messagesPerSecond}
+          onChange={handleMessagesPerSecondInputChange}
+          type="number"
+          placeholder="Messages/second"
           className="input input-bordered w-[200px] md:w-[300px] m-2"
-      />
+        />
 
-      <input
-        value={messagesPerSecond}
-        onChange={handleMessagesPerSecondInputChange}
-        type="number"
-        placeholder="Messages/second"
-        className="input input-bordered w-[200px] md:w-[300px] m-2"
-      />
-
-      <select
-        value={dropDown}
-        onChange={handleProducerSelect}
-        className="select select-bordered w-[200px] md:w-[276px] m-2"
-      >
-      <option value="DEFAULT" disabled>Select a producer:</option>
-      {producersList}
-      </select>
-
-      <button
-        onClick={handleStartButtonClick}
-        className="btn btn-primary m-2 w-[200px] text-white"
-      >
-        Start Producer
-      </button>
-
-      <div className="flex flex-col md:flex-row justify-center items-center max-w-[800px]">
-        <button
-          onClick={handleStopButtonClick}
-          className="btn bg-gray-600 hover:bg-red-800 text-white m-2 w-[200px]"
+        <select
+          value={dropDown}
+          onChange={handleProducerSelect}
+          className="select select-bordered w-[200px] md:w-[276px] m-2"
         >
-          Stop Producer
+        <option value="DEFAULT" disabled>Select a producer:</option>
+        {producersList}
+        </select>
+
+        <button
+          onClick={handleStartButtonClick}
+          className="btn btn-primary m-2 w-[200px] text-white"
+        >
+          Start Producer
         </button>
-      </div>
+
+        <div className="flex flex-col md:flex-row justify-center items-center max-w-[800px]">
+          <button
+            onClick={handleStopButtonClick}
+            className="btn bg-gray-600 hover:bg-red-800 text-white m-2 w-[200px]"
+          >
+            Stop Producer
+          </button>
+        </div>
       </div>
     </div>
 
