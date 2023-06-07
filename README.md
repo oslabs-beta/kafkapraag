@@ -14,9 +14,9 @@ Description of the project
     - [Creating Producers](#creating-producers)
     - [Interpreting Metrics](#interpreting-metrics)
 - [Configuration](#configuration)
-- [FAQ](#faq)
+- [Built With](#Built-With)
+- [Contributors](#Contributors)
 - [License](#license)
-- [Team](#team)
 
 ## Features
 - Real-time monitoring of key Apache Kafka metrics
@@ -73,12 +73,6 @@ To run kafkaPRAAG with your own custom cluster, you'll need to set up Jolokia wi
         Change `jolokia.jar` to the filename of Jolokia JVM agent you downloaded.
 9. In the terminal, navigate to the `/demo` folder. Run the command `docker-compose up`.
 10. In your web-browser, navigate to http://localhost:3000 to open the application.
-
-
-<!-- 
-#### section 1
-
-#### section 2 -->
 
 ### Adding Authentication
 
@@ -144,6 +138,16 @@ mongodb+srv://<username>:<password>@cluster0.c4twmob.mongodb.net/?retryWrites=tr
 
 ## Planned Features
 
-## License
+## Built With
+![My Skills](https://skillicons.dev/icons?i=react,nextjs,ts,tailwind,kafka,mongodb,jest,d3,docker,aws,&perline=5)
 
-## Team
+## Contributors
+| Name | GitHub | LinkedIn |
+| ---- | ------ | -------- |
+| [**Richard Wu**](#) | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/camina-drummer) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wurichard/) |
+| [**Hank McGill**](#) | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hankfontaine/) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hank-mcgill/) |
+| [**Cat Kim**](#) | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ckim722) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/catkim722/) |
+| [**Sherry Lu**](#) | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sherrii) | [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sherryl2523/) |
+
+### License
+[MIT](https://choosealicense.com/licenses/mit/)
