@@ -9,11 +9,8 @@ const Topics: React.FC = () => {
       fetch('/api/topics', { cache: 'no-store' })
         .then(async data => await data.json())
         .then(data => {
-          // console.log('data is', data);
-
-          // filter out '__consumer_offsets topic' for each consumer
+          // filter '__consumer_offsets topic' from consumers
           const filteredData = data.topics.filter((topic: string) => topic !== '__consumer_offsets')
-          // console.log('filteredData: ', filteredData)
           setTopic(filteredData.length)
         })
         .catch((err) => { console.log(err) })
