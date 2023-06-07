@@ -18,11 +18,11 @@ services:
     depends_on:
       - kafka-zookeeper-1
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=kafka-zookeeper-1:2181
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-broker-1:9092,PLAINTEXT_HOST://localhost:9092
-      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
-      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      # - KAFKA_ZOOKEEPER_CONNECT=kafka-zookeeper-1:2181
+      # - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-broker-1:9092,PLAINTEXT_INTERNAL://localhost:9092,PLAINTEXT_HOST://host.docker.internal:9092
+      # - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      # - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      # - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
       - KAFKA_JMX_OPTS=-javaagent:/usr/src/app/jolokia.jar=port=8778,host=0.0.0.0
         -Dcom.sun.management.jmxremote=true
         -Dcom.sun.management.jmxremote.authenticate=false
@@ -43,4 +43,4 @@ services:
     depends_on:
       - kafka-broker-1
     volumes:
-      - ./.env.development:/usr/src/app/.env.production
+      - ../.env.local:/usr/src/app/.env.production
