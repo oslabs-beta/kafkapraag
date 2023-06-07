@@ -3,7 +3,14 @@ import '../node_modules/@testing-library/jest-dom'
 import Landing from '../src/app/(preauth)/page.tsx'
 import OverallMetrics from '../src/app/(postauth)/overall/page.tsx'
 import { enableFetchMocks } from 'jest-fetch-mock';
+import { SessionProvider, useSession } from 'next-auth/react';
+
 enableFetchMocks();
+
+jest.mock('next-auth/react', () => ({
+  ...jest.requireActual('next-auth/react'),
+  useSession: jest.fn(),
+}));
 
 describe('Landing Page', () => {
   it('renders Logo Image and Authenticate Button', () => {
@@ -20,16 +27,26 @@ describe('Landing Page', () => {
 })
 
 describe('OverallMetrics', () => {
+
   beforeEach(() => {
-    fetch.resetMocks(); // Resets the fetch mock between tests
+    fetch.resetMocks();
   });
 
   it('renders overall page with producer-testing components', async () => {
+
+    useSession.mockReturnValue({ data: { session: { user: { email: 'test@example.com' } } } });
+
     fetch.mockResponseOnce(JSON.stringify({ producerList: [] }));
-    render(<OverallMetrics />);
+    render(
+      <SessionProvider>
+        <OverallMetrics />
+      </SessionProvider>
+    );
 
     await act(async () => {
-      render(<OverallMetrics />);
+      render(<SessionProvider>
+        <OverallMetrics />
+      </SessionProvider>);
     });
 
     const producerTestingElements = screen.getAllByTestId('producer-testing');
@@ -40,10 +57,18 @@ describe('OverallMetrics', () => {
 
   it('renders stats component', async () => {
     fetch.mockResponseOnce(JSON.stringify({ producerList: [] }));
-    render(<OverallMetrics />);
+    render(
+      <SessionProvider>
+        <OverallMetrics />
+      </SessionProvider>
+    );
 
     await act(async () => {
-      render(<OverallMetrics />);
+      render(
+        <SessionProvider>
+          <OverallMetrics />
+        </SessionProvider>
+      );
     });
 
     const statsComponents = screen.getAllByTestId('stats');
@@ -55,11 +80,16 @@ describe('OverallMetrics', () => {
   });
 
   it('renders Graph components', async () => {
-    fetch.mockResponseOnce(JSON.stringify({ producerList: [] }));
-    render(<OverallMetrics />);
+    render(
+      <SessionProvider>
+        <OverallMetrics />
+      </SessionProvider>
+    );
 
     await act(async () => {
-      render(<OverallMetrics />);
+      render(<SessionProvider>
+        <OverallMetrics />
+      </SessionProvider>);
     });
 
     const graphsComponents = screen.getAllByTestId('graphs');
@@ -71,11 +101,17 @@ describe('OverallMetrics', () => {
   });
 
   it('renders AddressInput components', async () => {
-    fetch.mockResponseOnce(JSON.stringify({ producerList: [] }));
-    render(<OverallMetrics />);
+
+    render(
+      <SessionProvider>
+        <OverallMetrics />
+      </SessionProvider>
+    );
 
     await act(async () => {
-      render(<OverallMetrics />);
+      render(<SessionProvider>
+        <OverallMetrics />
+      </SessionProvider>);
     });
 
     const AddressInputComponents = screen.getAllByTestId('AddressInput');
