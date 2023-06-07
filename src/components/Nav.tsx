@@ -3,8 +3,7 @@ import Link from 'next/link'
 import { useState, createContext, useContext } from 'react'
 import Image from 'next/image'
 import logo from 'src/assets/kafkaPRAAG-logo-transparent.png'
-// import { getProviders, signIn, signOut } from 'next-auth/react'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 interface NavProps {
   children: React.ReactNode

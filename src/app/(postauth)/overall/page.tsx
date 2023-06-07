@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import GraphTemplate from '@components/GraphTemplate'
+import GraphTemplate2 from '@components/GraphTemplate2'
 import ProducerTesting from '@components/ProducerTesting'
 import Stats from '@components/Stats'
 import AddressInput from '@components/AddressInput'
@@ -30,7 +31,7 @@ const OverallMetrics: React.FC = () => {
 
   const [tickCache, setTickCache] = useState<string[]>(['', ''])
 
-  const [brokers, setBrokers] = useState(['localhost:9092'])
+  const [brokers, setBrokers] = useState(['kafka-broker-1:9092'])
 
   useEffect(() => {
     let timePrev: number = 0
@@ -201,9 +202,8 @@ const OverallMetrics: React.FC = () => {
     </div>
     <div className="grid grid-cols-1 md:grid-cols-3  mt-4 text-base md:text-lg" data-testid="graphs">
         <div>
-          <GraphTemplate
+          <GraphTemplate2
             datapoints={mtm}
-            fdatapoints={[{ x: '0', y: 0 }]}
             visibleTicks={tickCache}
             title={'Messages per Second'}
           />
