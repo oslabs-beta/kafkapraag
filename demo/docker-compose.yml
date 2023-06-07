@@ -39,7 +39,7 @@ services:
       - kafka-broker-1
       - kafka-zookeeper-1
     volumes:
-      - ../.env.local:/usr/src/app/.env.production
+      - ./.env:/usr/src/app/.env.production
     
   kafka-consumer-1:
     container_name: kafka-consumer-1
