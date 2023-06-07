@@ -6,6 +6,8 @@ Description of the project
 
 - [Features](#features)
 - [Getting Started](#getting-started)
+    - [Demo Setup](#demo-setup)
+    - [Building the Image](#demo-setup)
 - [Configuration](#configuration)
 - [License](#license)
 - [FAQ](#faq)
@@ -30,16 +32,24 @@ Whether you want to run our already containerized version of the application in 
 
 ### Demo Setup:
 1. Clone this repository to your local machine
-2. Download the latest Jolokia JVM agent from [here](https://jolokia.org/download.html). The filename will be in the format jolokia-jvm-\<version\>.jar
-3. Rename the file to jolokia.jar. (Alternatively, you can skip this step and instead change the docker-compose.yml file in a later step to reflect the current filename.)
-4. Place the .jar file in the demo directory, overwriting the original file if necessary.
+2. Download the latest Jolokia JVM agent from [here](https://jolokia.org/download.html). The filename will be in the format `jolokia-jvm-<version>.jar`
+3. Rename the file to `jolokia.jar`. (Alternatively, you can skip this step and instead change the `docker-compose.yml` file in a later step to reflect the current filename.)
+4. Place the .jar file in the `/demo` directory, overwriting the original file if necessary.
 5. Install [Docker or Docker Desktop](https://docs.docker.com/get-docker/) if necessary.
 6. Install [Docker Compose](https://docs.docker.com/compose/) if necessary.
-7. Setup 
+7. Add authentication via NextAuth.js. See the section on [adding authentication](#adding-authentication) for detailed setup instructions, and return here when done.
+8. If you chose not to rename `jolokia-jvm-<version>.jar`, you must edit the `docker-compose.yml` file in the `/demo` directory.
+    - Open up `docker-compose.yml` in an editor. Under `kafka-broker-1`, find the `environment` property. You will see the following line:
+        ```
+        - KAFKA_JMX_OPTS=-javaagent:/usr/src/app/jolokia.jar=port=8778,host=0.0.0.0 
+        ```
+        Change `jolokia.jar` to the filename of Jolokia JVM agent you downloaded.
+9. In the terminal, navigate to the `/demo` folder. Run the command `docker-compose up`.
+10. In your web-browser, navigate to http://localhost:3000 to open the app.
 
-1. Docker Compose file
-    1. configuration of environmental variables
-    2. Jolokia and mapping volumes
+### Building the Image:
+
+
 
 #### section 1
 
@@ -51,7 +61,7 @@ Whether you want to run our already containerized version of the application in 
 
 kafkaPRAAG uses NextAuth (https://github.com/nextauthjs/next-auth) to allow JWT-based user authentication. Before running your application, you'll have to add a few environment variables:
 
--in the ROOT directory of your file, add your own Google and/or Github authentication secrets to your dotenv file, which we have provided for you:
+-in the same directory as your docker-compose.yml file (i.e. the demo folder when running the demo setup), add your own Google and/or Github authentication secrets to the .env file provided, which we have provided for you:
 
 ```
 GitHub OAuth Information
