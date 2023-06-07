@@ -85,7 +85,7 @@ const BrokersBytesInGraph: React.FC = () => {
   }, [])
 
   return (
-    <div className="h-auto w-[750px] p-10">
+    <section className="h-auto w-[750px] p-10">
       <VictoryChart>
         <VictoryLabel
           text={`Bytes in per second: ${Math.round(bytesPerSecond[bytesPerSecond.length - 1].y)}`}
@@ -120,7 +120,7 @@ const BrokersBytesInGraph: React.FC = () => {
         <VictoryAxis crossAxis dependentAxis
         />
       </VictoryChart>
-    </div>
+    </section>
   )
 }
 

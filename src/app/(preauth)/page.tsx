@@ -7,7 +7,7 @@ import { getProviders, signIn } from 'next-auth/react'
 
 const Landing: React.FC = () => {
   return (
-    <div className="hero min-h-screen">
+    <main className="hero min-h-screen">
       <div className="hero-content text-center">
         <div className="max-w-lg flex flex-col justify-center items-center">
           <div className="font-title font-semibold text-primary inline-flex text-6xl transition-all duration-200 md:text-8xl text-center">
@@ -32,7 +32,7 @@ const Landing: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 

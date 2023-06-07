@@ -18,12 +18,12 @@ const Topics: React.FC = () => {
     return () => { clearInterval(interval) }
   }, [])
   return (
-        <div className="stats border-none shadow-none text-center">
+        <section className="stats border-none shadow-none text-center">
             <div className="stat border-none shadow-none text-center">
                 <div className="stat-title font-extralight">Total Topics</div>
                 <div className="stat-value font-extralight text-primary">{Topic}</div>
             </div>
-        </div>
+        </section>
   )
 }
 

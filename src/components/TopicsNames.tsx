@@ -27,7 +27,7 @@ const TopicsNames: React.FC = () => {
     return () => { clearInterval(interval) }
   }, [])
   return (
-        <div className="overflow-x-auto">
+        <section className="overflow-x-auto">
             <table className="table table-zebra w-full">
                 {/* head */}
                 <thead>
@@ -40,7 +40,7 @@ const TopicsNames: React.FC = () => {
                     {tabled}
                 </tbody>
             </table>
-            </div>
+        </section>
   )
 }
 
