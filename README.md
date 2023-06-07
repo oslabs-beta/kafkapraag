@@ -12,7 +12,8 @@ Description of the project
 - [Team](#team)
 
 ### Features
-
+- Real-time monitoring of key Apache Kafka metrics
+- Responsive UI scaled for 
 
 ### Getting Started
 
