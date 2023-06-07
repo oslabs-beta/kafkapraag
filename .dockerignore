@@ -3,6 +3,5 @@ node_modules
 .next
 jolokia
 demo
-package-lock.json
 .env.local
 README.md

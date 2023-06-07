@@ -29,13 +29,24 @@ services:
         -Djava.net.preferIPv4Stack=true
     volumes:
       - ./jolokia:/usr/src/app
-  
+
   kafkapraag:
     container_name: kafkapraag
-    image: praag/kafkapraag:latest
+    image: kafkapraag/kafkapraag:latest
     ports:
       - 3000:3000
     depends_on:
       - kafka-broker-1
+      - kafka-zookeeper-1
     volumes:
       - ../.env.local:/usr/src/app/.env.production
+    
+  kafka-consumer-1:
+    container_name: kafka-consumer-1
+    image: ubuntu/kafka:latest
+    depends_on:
+      - kafkapraag
+      - kafka-broker-1
+      - kafka-zookeeper-1
+    entrypoint: /opt/kafka/bin/kafka-console-consumer.sh
+    command: --topic topic1 --bootstrap-server=kafka-broker-1:9092

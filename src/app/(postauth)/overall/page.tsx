@@ -149,7 +149,7 @@ const OverallMetrics: React.FC = () => {
             newCOMR.shift()
             newCOMR.push({
               x: curTime,
-              y: parseInt(consumerOMR) + 1.5
+              y: parseInt(consumerOMR)
             })
             return newCOMR
           })
