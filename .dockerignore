@@ -1,8 +1,8 @@
+__tests__
 node_modules
 .next
+jolokia
+demo
 package-lock.json
 .env.local
-.env.development
-/jolokia
-/demo
 README.md
