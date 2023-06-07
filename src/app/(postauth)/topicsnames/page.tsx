@@ -1,11 +1,18 @@
 'use client'
 import TopicsNames from '@components/TopicsNames'
-import { useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 const Test: React.FC = () => {
   const { data: session } = useSession()
 
-  if (session != null) {
+  if (session === null) {
+    return (<div className='md:mr-80 mt-80 flex flex-wrap justify-center '>    <button className='btn btn-outline btn-accent' onClick={(e) => {
+      // @ts-expect-error - using next-auth cb w/o undefined as fallback type
+      signIn({ callbackUrl: 'http://localhost:3000/overall' })
+        .catch((err) => { console.log(err) })
+    }}>You are not currently authorized to view this page.  Click here to sign in</button>
+  </div>)
+  } else {
     return (
     <div className="flex-column">
       <p className="text-center text-4xl font-light">Topics Names</p>
@@ -14,9 +21,6 @@ const Test: React.FC = () => {
       </div>
     </div>
     )
-  } else {
-    return (<>
-  </>)
   }
 }
 

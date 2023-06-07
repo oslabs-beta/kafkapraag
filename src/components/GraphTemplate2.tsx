@@ -7,20 +7,19 @@ interface Datapoint {
   y: number
 }
 
-interface GraphTemplateProps {
+interface GraphTemplate2Props {
   datapoints: Datapoint[]
-  fdatapoints: Datapoint[]
   visibleTicks: string[]
   title: string
 }
 
 // BytesPerSecond graph component
-const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, visibleTicks, title }) => {
+const GraphTemplate2: React.FC<GraphTemplate2Props> = ({ datapoints, visibleTicks, title }) => {
   const chartTitle = `${title} : ${Math.round(datapoints[datapoints.length - 1].y)}`
   const theme = useThemeContext()
 
   return (
-    <section className="h-auto w-auto">
+    <div className="h-auto w-auto">
       <VictoryChart>
           <VictoryLabel
             text= {chartTitle}
@@ -41,16 +40,6 @@ const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, 
           domain={{ y: [0, 10] }}
           interpolation="basis"
         />
-        <VictoryLine
-          style={{
-            data: { stroke: '#c43a31' },
-            parent: { border: '1px solid #ccc' }
-          }}
-          data={fdatapoints}
-          domain={{ y: [0, 10] }}
-          interpolation="basis"
-        />
-
         <VictoryArea
             data={datapoints}
             style={{
@@ -102,8 +91,8 @@ const GraphTemplate: React.FC<GraphTemplateProps> = ({ datapoints, fdatapoints, 
           }}
         />
       </VictoryChart>
-    </section>
+    </div>
   )
 }
 
-export default GraphTemplate
+export default GraphTemplate2

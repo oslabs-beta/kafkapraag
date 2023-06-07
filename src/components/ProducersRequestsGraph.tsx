@@ -73,7 +73,7 @@ const ProducersRate: React.FC = () => {
   }, [])
 
   return (
-    <div className="h-auto w-[600px]">
+    <section className="h-auto w-[600px]">
       <VictoryChart>
         <VictoryLabel
           text={`Producer Requests per Minute: ${Math.round(ProducersRate[ProducersRate.length - 1].y)}`}
@@ -108,7 +108,7 @@ const ProducersRate: React.FC = () => {
         <VictoryAxis crossAxis dependentAxis
         />
       </VictoryChart>
-    </div>
+    </section>
   )
 }
 
