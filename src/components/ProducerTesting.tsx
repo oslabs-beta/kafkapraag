@@ -18,7 +18,6 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
   // Change these from hardcoded values to useState when adding feature to choose cluster connection
   // const brokers = ['localhost:9092']
   const clientId = 'kafkajs-producer1'
-  console.log('brokers', brokers)
   const handleProducerNameInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setProducerName(e.target.value)
   }
@@ -112,7 +111,6 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
     fetch('/api/producers')
       .then(async (data) => await data.json())
       .then((parsed) => {
-        console.log(parsed.producerList)
         const newProducerList = parsed.producerList.map((prodName: string) => {
           return (
           <option key={`prodlist${Date.now()}`}>{prodName}</option>

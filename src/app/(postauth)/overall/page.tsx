@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
 import GraphTemplate from '@components/GraphTemplate'
+import GraphTemplate2 from '@components/GraphTemplate2'
 import ProducerTesting from '@components/ProducerTesting'
 import Stats from '@components/Stats'
-// import { TextSize } from 'victory'
 import AddressInput from '@components/AddressInput'
 import { signIn, useSession } from 'next-auth/react'
 
@@ -31,7 +31,7 @@ const OverallMetrics: React.FC = () => {
 
   const [tickCache, setTickCache] = useState<string[]>(['', ''])
 
-  const [brokers, setBrokers] = useState(['localhost:9092'])
+  const [brokers, setBrokers] = useState(['kafka-broker-1:9092'])
 
   useEffect(() => {
     let timePrev: number = 0
@@ -189,10 +189,10 @@ const OverallMetrics: React.FC = () => {
     <div className="mx-10 my-5">
 
     <p className="text-center text-3xl md:text-4xl">Dashboard</p>
-    <div className="grid grid-col-1 md:grid-col-5 gap-4 items-center mt-5">
+    <div className="grid grid-col-1 md:grid-col-5 gap-4 items-center mt-5 " data-testid="producer-testing">
         <ProducerTesting brokers = {brokers}/>
     </div>
-    <div className="mt-4 md:mt-8">
+    <div className="mt-4 md:mt-8" data-testid="stats">
       <Stats
         totalPartitions={totalPartitions}
         totalTopics={totalTopics}
@@ -201,11 +201,10 @@ const OverallMetrics: React.FC = () => {
         offlineBrokers={offlineBrokers}
       />
     </div>
-    <div className="grid grid-cols-1 md:grid-cols-3  mt-4 text-base md:text-lg">
+    <div className="grid grid-cols-1 md:grid-cols-3  mt-4 text-base md:text-lg" data-testid="graphs">
         <div>
-          <GraphTemplate
+          <GraphTemplate2
             datapoints={mtm}
-            fdatapoints={[{ x: '0', y: 0 }]}
             visibleTicks={tickCache}
             title={'Messages per Second'}
           />
@@ -228,7 +227,7 @@ const OverallMetrics: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 my-4 md:flex-row md:justify-center md:items-center">
+      <div className="flex flex-col gap-2 my-4 md:flex-row md:justify-center md:items-center" data-testid="AddressInput">
 
         <div className="alert alert-gray-200">
           <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
