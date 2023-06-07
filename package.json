@@ -20,6 +20,7 @@
     "d3-color": "^3.1.0",
     "daisyui": "^2.51.6",
     "eslint-config-next": "13.4.2",
+    "jest-fetch-mock": "^3.0.3",
     "kafkajs": "^2.2.4",
     "next": "13.4.2",
     "next-auth": "^4.22.1",
