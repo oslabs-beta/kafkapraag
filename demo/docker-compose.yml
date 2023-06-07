@@ -32,7 +32,7 @@ services:
   
   kafkapraag:
     container_name: kafkapraag
-    image: praag/kafkapraag:latest
+    image: kafkapraag/kafkapraag:latest
     ports:
       - 3000:3000
     depends_on:
