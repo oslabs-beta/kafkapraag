@@ -4,8 +4,11 @@ import GraphTemplate from '@components/GraphTemplate'
 import ProducerTesting from '@components/ProducerTesting'
 import Stats from '@components/Stats'
 import AddressInput from '@components/AddressInput'
+import { signIn, useSession } from 'next-auth/react'
 
 const OverallMetrics: React.FC = () => {
+  const { data: session } = useSession()
+
   const dataPoints: Array<{ x: string, y: number }> = []
   for (let i = 0; i < 20; i++) {
     dataPoints.push({ x: `${i}`, y: 0 })
@@ -171,7 +174,14 @@ const OverallMetrics: React.FC = () => {
     return () => { clearInterval(interval) }
   }, [])
 
-  return (
+  if (session === null) {
+    return (<div className='md:mr-80 mt-80 flex flex-wrap justify-center '>    <button className='btn btn-outline btn-accent' onClick={(e) => {
+      signIn({ callbackUrl: 'http://localhost:3000/overall' })
+        .catch((err) => { console.log(err) })
+    }}>You are not currently authorized to view this page.  Click here to sign in</button>
+  </div>)
+  } else {
+    return (
     // need to change css to dynamically adjust min/max width
     // also needs to dynamically update producer drop down options upon change of cluster address
     <div className="mx-10 my-5">
@@ -226,7 +236,8 @@ const OverallMetrics: React.FC = () => {
       </div>
     </div>
 
-  )
+    )
+  }
 }
 
 export default OverallMetrics
