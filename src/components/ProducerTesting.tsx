@@ -123,7 +123,7 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <section className="flex flex-col justify-center items-center">
       <p className="text-2xl mb-7">Producer Testing</p>
 
       <div className="flex flex-col md:flex-wrap md:flex-row xl:flex-nowrap xl:flex-row xl:justify-center items-center w-full md:max-w-[800px]">
@@ -169,7 +169,7 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
           </button>
         </div>
       </div>
-    </div>
+    </section>
 
   )
 }
