@@ -60,7 +60,6 @@ const OverallMetrics: React.FC = () => {
       })
         .then(async (data) => await data.json())
         .then((parsed) => {
-          console.log('parsed', parsed)
           // Destructure the fetched data
           // Messages In
           // const messagesTM = parsed[0].value.Count; // Total messages
@@ -129,7 +128,7 @@ const OverallMetrics: React.FC = () => {
             newPOMR.shift()
             newPOMR.push({
               x: curTime,
-              y: producerOMR / 1.8
+              y: producerOMR
             })
             return newPOMR
           })

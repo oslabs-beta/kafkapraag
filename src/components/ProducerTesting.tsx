@@ -11,13 +11,9 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
 
   const [producerName, setProducerName] = useState('')
   const [messagesPerSecond, setMessagesPerSecond] = useState('')
+  // This whill be dynamic in a future release
+  const clientId = 'kafkajs-producer-1'
 
-  // Currently using default values for testing, need dynamic values
-  // const [brokers, setBrokers] = useState(['localhost:9092'])
-  // const [clientId, setClientId] = useState('kafkajs-producer1')
-  // Change these from hardcoded values to useState when adding feature to choose cluster connection
-  // const brokers = ['localhost:9092']
-  const clientId = 'kafkajs-producer1'
   const handleProducerNameInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setProducerName(e.target.value)
   }
@@ -111,9 +107,9 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
     fetch('/api/producers')
       .then(async (data) => await data.json())
       .then((parsed) => {
-        const newProducerList = parsed.producerList.map((prodName: string) => {
+        const newProducerList = parsed.producerList.map((prodName: string, idx: number) => {
           return (
-          <option key={`prodlist${Date.now()}`}>{prodName}</option>
+          <option key={`prodlist${idx}${Math.random()}`}>{prodName}</option>
           )
         })
         setProducersList(newProducerList.length > 0 ? newProducerList : <option disabled>No producers running</option>)
@@ -149,8 +145,8 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
           onChange={handleProducerSelect}
           className="select select-bordered w-[200px] md:w-[276px] m-2"
         >
-        <option value="DEFAULT" disabled>Select a producer:</option>
-        {producersList}
+          <option value="DEFAULT" disabled>Select a producer:</option>
+          {producersList}
         </select>
 
         <button
