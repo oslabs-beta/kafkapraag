@@ -255,6 +255,9 @@ Select a producer from the dropdown menu and click stop to terminate it.
 3. Number of partitions offline
 4. Total number of brokers in the cluster
 5. Number of offline (fenced) brokers
+6. One-minute average of messages in per second
+7. One-minute average of producer requests per second
+8. One-minute average of consumer requests per second
 
 ![dashboard-key](https://raw.githubusercontent.com/oslabs-beta/progue-for-kafka/dev/src/assets/readme/dashboard.png)
 
