@@ -49,4 +49,4 @@ services:
       - kafka-broker-1
       - kafka-zookeeper-1
     entrypoint: /opt/kafka/bin/kafka-console-consumer.sh
-    command: --topic topic1 --bootstrap-server=kafka-broker-1:9092
+    command: --topic kafkajs-producer-test-topic --bootstrap-server=kafka-broker-1:9092
