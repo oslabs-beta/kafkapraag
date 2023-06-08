@@ -2,8 +2,10 @@ import NextAuth from 'next-auth/next'
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
 import { type NextAuthOptions } from 'next-auth'
-import { MongoDBAdapter } from '@next-auth/mongodb-adapter'
-import clientPromise from '@app/api/models/mongoDB/route'
+
+// COMMENT THE FOLLOWING LINES IN IF USING MONGODB:
+// import { MongoDBAdapter } from '@next-auth/mongodb-adapter'
+// import clientPromise from '@app/api/models/mongoDB/route'
 
 // Secrets must be attained from provider and then stored in a root level .env file
 
@@ -26,8 +28,9 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   // this secret is required to use NextAuth, generate here: https://next-auth.js.org/configuration/options
-  secret: process.env.NEXTAUTH_SECRET,
-  adapter: MongoDBAdapter(clientPromise)
+  secret: process.env.NEXTAUTH_SECRET
+  // COMMENT THE FOLLOWING LINE BACK IN IF USING MONGODB
+  // adapter: MongoDBAdapter(clientPromise)
 }
 const handler = NextAuth(authOptions)
 // because NextAuth is still partially built on Next 12 logic, we use auth object as a route handler

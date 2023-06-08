@@ -3,6 +3,7 @@
 # kafkaPRAAG: A health and performance visualizer for Apache Kafka.
 
 **Table of Contents**
+
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [Demo Setup](#demo-setup)
@@ -15,7 +16,9 @@
 - [Built With](#built-with)
 - [Contributors](#contributors)
 - [License](#license)
+
 ---
+
 ## Features
 
 - Real-time monitoring of key Apache Kafka metrics
@@ -23,7 +26,9 @@
 - Authentication through Google and GitHub OAuth
 - Modern, responsive, and accessibility-conscious UI scaled for desktop and mobile devices
 - Customizeable to suit a wide range of Kafka deployment configurations
+
 ---
+
 ## Getting Started
 
 Whether you want to run our already containerized version of kafkaPRAAG in a demo setup or [use the application with a custom cluster](#running-a-custom-cluster), you will need the following to get started:
@@ -115,21 +120,21 @@ To run kafkaPRAAG with your own custom cluster, you'll need to set up Jolokia wi
      ```
      Note that in the second line, `jolokia.jar` will need to be changed to the path and filename of the agent on your host filesystem. You can change the host from `0.0.0.0` to `localhost` if you do not want Jolokia to listen on all network interfaces.
    - If you're running the Kafka node in a container, you can either set the environmental variable (using the `ENV` statement in your Dockerfile) when building your Kafka node, or add it to your `docker run` command like this:
-        ```shell
-        docker run --env KAFKA_JMX_OPTS=" \
-        -javaagent:jolokia.jar=port=8778,host=0.0.0.0 \
-        -Djolokia.updateInterval=500 \
-        -Dcom.sun.management.jmxremote=true \
-        -Dcom.sun.management.jmxremote.authenticate=false \
-        -Dcom.sun.management.jmxremote.ssl=false \
-        -Djava.rmi.server.hostname=localhost \
-        -Dcom.sun.management.jmxremote.host=localhost \
-        -Dcom.sun.management.jmxremote.port=9999 \
-        -Dcom.sun.management.jmxremote.rmi.port=9999 \
-        -Djava.net.preferIPv4Stack=true" \
-        --name my-kafka-broker \
-        your/image:latest
-        ```
+     ```shell
+     docker run --env KAFKA_JMX_OPTS=" \
+     -javaagent:jolokia.jar=port=8778,host=0.0.0.0 \
+     -Djolokia.updateInterval=500 \
+     -Dcom.sun.management.jmxremote=true \
+     -Dcom.sun.management.jmxremote.authenticate=false \
+     -Dcom.sun.management.jmxremote.ssl=false \
+     -Djava.rmi.server.hostname=localhost \
+     -Dcom.sun.management.jmxremote.host=localhost \
+     -Dcom.sun.management.jmxremote.port=9999 \
+     -Dcom.sun.management.jmxremote.rmi.port=9999 \
+     -Djava.net.preferIPv4Stack=true" \
+     --name my-kafka-broker \
+     your/image:latest
+     ```
      You can achieve the same result with Docker compose, by setting an entry under the `environment` property of the container you defined for your Kafka node:
      ```yml
      kafka-broker-1:
@@ -157,7 +162,7 @@ To run kafkaPRAAG with your own custom cluster, you'll need to set up Jolokia wi
 
 ### Adding Authentication
 
->**IMPORTANT NOTE**: NextAuth.js (now Auth.js) is built with a security-first emphasis. As a result, you CANNOT use multiple accounts for the same user(for example, once you register as a user with your Github account, you won't be able to sign in or out with your Gmail account). Pick your means of authorization carefully!
+> **IMPORTANT NOTE**: NextAuth.js (now Auth.js) is built with a security-first emphasis. As a result, you CANNOT use multiple accounts for the same user(for example, once you register as a user with your Github account, you won't be able to sign in or out with your Gmail account). Pick your means of authorization carefully!
 
 kafkaPRAAG uses NextAuth (https://github.com/nextauthjs/next-auth) to allow JWT-based user authentication. Before running your application, you'll have to add a few environment variables:
 
@@ -184,8 +189,8 @@ MONGODB_URI=""
 
 To get your environment variables for NextAuth, follow directions below:
 
->**NOTE:** when registering for OAuth, make sure you add the following Authorized redirect URI, including the name of the selected provider at the end. For example, if using Google:
-http://localhost:3000/api/auth/callback/google
+> **NOTE:** when registering for OAuth, make sure you add the following Authorized redirect URI, including the name of the selected provider at the end. For example, if using Google:
+> http://localhost:3000/api/auth/callback/google
 
 Register for Google OAuth (if link leads to a blank screen, try refreshing the page):
 https://console.developers.google.com/apis/credentials
@@ -196,7 +201,11 @@ https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps
 For more OAuth providers, check out NextAuth's documentation here:
 https://next-auth.js.org/providers/
 
->**NOTE:** The syntax will be a bit different on their site from our product, as NextAuth's documentation still uses Next12 syntax.
+> **NOTE:** The syntax will be a bit different on their site from our product, as NextAuth's documentation still uses Next12 syntax.
+
+`Optional`: add MongoDB data collection to your application
+
+`To add MongoDB to your application`, navigate to src/app/api/models/mongoDB/route.tsx and follow the directions there before moving on in this tutorial. `Make sure you follow the directions that lead you to src/app/api/auth/[...nextauth]/route.ts afterwards!`
 
 Register your application with MongoDB to verify user sessions: https://www.mongodb.com/basics/create-database
 
@@ -214,7 +223,11 @@ mongodb+srv://<username>:<password>@cluster0.c4twmob.mongodb.net/?retryWrites=tr
 ```
 
 9. After successfully running your application, you'll now be able to see your unique users in your "users" collection.
+
+- `While adding MongoDB to your application is not required for it to run, we recommend setting up a database so that you can a) better track your users and b) add an additional level of security to your Kafka cluster data.`
+
 ---
+
 ## Using the Application
 
 ### Connecting to the Cluster
