@@ -240,7 +240,7 @@ Enter a bootstrap address of the Kafka cluster you want to connect to:
 
 Enter a name for the producer and a messages per second value, then click start to connect the producer and have it begin sending messages to your cluster.
 
-![start-producer]()
+![start-producer](https://raw.githubusercontent.com/oslabs-beta/progue-for-kafka/dev/src/assets/readme/start_producer.gif)
 
 ### Stopping Producers
 
@@ -250,19 +250,20 @@ Select a producer from the dropdown menu and click stop to terminate it.
 
 ### Interpreting Metrics
 
-1. This chart shows the
-2. This chart shows the
-3. This chart shows the
-4. This value shows the
-5. This value shows the
-6. This value shows the
-7. This value shows the
+1. Total number of topics in the cluster
+2. Total number of partitions in the cluster
+3. Number of partitions offline
+4. Total number of brokers in the cluster
+5. Number of offline (fenced) brokers
+6. One-minute average of messages in per second
+7. One-minute average of producer requests per second
+8. One-minute average of consumer requests per second
 
-![]()
+![dashboard-key](https://raw.githubusercontent.com/oslabs-beta/progue-for-kafka/dev/src/assets/readme/dashboard.png)
 
 ## Built With
 
-![My Skills](https://skillicons.dev/icons?i=react,nextjs,ts,tailwind,kafka,mongodb,jest,d3,docker,aws,&perline=5)
+![my-skills](https://skillicons.dev/icons?i=react,nextjs,ts,tailwind,kafka,mongodb,jest,d3,docker,aws,&perline=5)
 
 ## Contributors
 
