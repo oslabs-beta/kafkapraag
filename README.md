@@ -250,6 +250,8 @@ Select a producer from the dropdown menu and click stop to terminate it.
 
 ### Interpreting Metrics
 
+![dashboard-labled](https://raw.githubusercontent.com/oslabs-beta/progue-for-kafka/dev/src/assets/readme/dashboard.png)
+
 1. Total number of topics in the cluster
 2. Total number of partitions in the cluster
 3. Number of partitions offline
@@ -258,8 +260,6 @@ Select a producer from the dropdown menu and click stop to terminate it.
 6. One-minute average of messages in per second
 7. One-minute average of producer requests per second
 8. One-minute average of consumer requests per second
-
-![dashboard-labled](https://raw.githubusercontent.com/oslabs-beta/progue-for-kafka/dev/src/assets/readme/dashboard.png)
 
 ## Built With
 
