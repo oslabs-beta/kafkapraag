@@ -8,7 +8,7 @@ interface AddressInputProps {
 const AddressInput: React.FC<AddressInputProps> = ({ setBrokers }) => {
   return (
     <section>
-      <label htmlFor="my_modal_6" className="btn btn-primary">Change cluster address</label>
+      <label htmlFor="my_modal_6" className="btn btn-outline btn-secondary">Change cluster address</label>
 
       <input type="checkbox" id="my_modal_6" className="modal-toggle" />
       <div className="modal">
