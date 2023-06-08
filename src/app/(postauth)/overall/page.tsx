@@ -187,11 +187,11 @@ const OverallMetrics: React.FC = () => {
     // also needs to dynamically update producer drop down options upon change of cluster address
     <div className="mx-10 my-5">
 
-    <p className="text-center text-3xl md:text-4xl">Dashboard</p>
+    <h1 className="text-center text-3xl md:text-4xl font-light">Dashboard</h1>
     <div className="grid grid-col-1 md:grid-col-5 gap-4 items-center mt-5 " data-testid="producer-testing">
         <ProducerTesting brokers = {brokers}/>
     </div>
-    <div className="mt-4 md:mt-8" data-testid="stats">
+    <div className="mt-4 md:mt-0" data-testid="stats">
       <Stats
         totalPartitions={totalPartitions}
         totalTopics={totalTopics}
@@ -227,9 +227,8 @@ const OverallMetrics: React.FC = () => {
       </div>
 
       <div className="flex flex-col gap-2 my-4 md:flex-row md:justify-center md:items-center" data-testid="AddressInput">
-
-        <div className="alert alert-gray-200">
-          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <div className="alert alert-gray-200 bg-transparent">
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-success shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
           <p className='text-lg'>Current Cluster Address: {brokers}</p>
           <AddressInput setBrokers = {setBrokers}/>
         </div>

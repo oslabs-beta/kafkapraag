@@ -120,7 +120,7 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
 
   return (
     <section className="flex flex-col justify-center items-center">
-      <p className="text-2xl mb-7">Producer Testing</p>
+      <h2 className="text-2xl mb-7 font-extralight">Producer Testing</h2>
 
       <div className="flex flex-col md:flex-wrap md:flex-row xl:flex-nowrap xl:flex-row xl:justify-center items-center w-full md:max-w-[800px]">
 
@@ -159,7 +159,7 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
         <div className="flex flex-col md:flex-row justify-center items-center max-w-[800px]">
           <button
             onClick={handleStopButtonClick}
-            className="btn bg-gray-600 hover:bg-red-800 text-white m-2 w-[200px]"
+            className="btn m-2 w-[200px] btn-outline"
           >
             Stop Producer
           </button>
