@@ -20,7 +20,7 @@
 ---
 
 ## Features
-
+![dashboard](https://raw.githubusercontent.com/oslabs-beta/progue-for-kafka/dev/src/assets/readme/dashboard.gif)
 - Real-time monitoring of key Apache Kafka metrics
 - Producer creation and message generation for cluster throughput testing
 - Authentication through Google and GitHub OAuth
@@ -234,13 +234,19 @@ mongodb+srv://<username>:<password>@cluster0.c4twmob.mongodb.net/?retryWrites=tr
 
 Enter a bootstrap address of the Kafka cluster you want to connect to:
 
-> Image here
+![change-cluster](https://raw.githubusercontent.com/oslabs-beta/progue-for-kafka/dev/src/assets/readme/change_cluster.gif)
 
 ### Creating Producers
 
 Enter a name for the producer and a messages per second value, then click start to connect the producer and have it begin sending messages to your cluster.
 
-> Image here
+![start-producer]()
+
+### Stopping Producers
+
+Select a producer from the dropdown menu and click stop to terminate it.
+
+![stop-producer](https://raw.githubusercontent.com/oslabs-beta/progue-for-kafka/dev/src/assets/readme/stop_producer2.gif)
 
 ### Interpreting Metrics
 
@@ -252,7 +258,7 @@ Enter a name for the producer and a messages per second value, then click start 
 6. This value shows the
 7. This value shows the
 
-> Image here
+![]()
 
 ## Built With
 
