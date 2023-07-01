@@ -9,7 +9,7 @@ import { type NextAuthOptions } from 'next-auth'
 
 // Secrets must be attained from provider and then stored in a root level .env file
 
-// Sign up for an OAuth 2.0 Client ID using this form: https://console.cloud.google.com/apis/credentials?pli=1&project=friendly-chat-368817
+// Sign up for OAuth 2.0 Client ID here: https://console.cloud.google.com/apis/credentials?pli=1&project=friendly-chat-368817
 const googleId: string = process.env.GOOGLE_CLIENT_ID as string
 const googleSecret: string = process.env.GOOGLE_CLIENT_SECRET as string
 // Sign up for OAuth via Github secret: https://github.com/settings/apps
@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
   ],
   // this secret is required to use NextAuth, generate here: https://next-auth.js.org/configuration/options
   secret: process.env.NEXTAUTH_SECRET
-  // COMMENT THE FOLLOWING LINE BACK IN IF USING MONGODB
+  // COMMENT THE FOLLOWING LINE IN IF USING MONGODB
   // adapter: MongoDBAdapter(clientPromise)
 }
 const handler = NextAuth(authOptions)
