@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import logo from 'src/assets/kafkaPRAAG-logo-transparent.png'
-import GIF from 'src/assets/landing.GIF'
+import GIF from 'src/assets/landing.gif'
 
 import { getProviders, signIn } from 'next-auth/react'
 

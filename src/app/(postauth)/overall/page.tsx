@@ -14,10 +14,7 @@ const OverallMetrics: React.FC = () => {
   for (let i = 0; i < 20; i++) {
     dataPoints.push({ x: `${i}`, y: 0 })
   }
-  // const dataPoints: {x: string, y: number, count: number, timestamp: number}[] = [];
-  // for (let i = 0; i < 20; i++) {
-  //   dataPoints.push({x: `${i}`, y: 0, count: 0, timestamp: Date.now()});
-  // }
+
   const [mtm, setMtm] = useState(dataPoints)
   const [producerOMR, setProducerOMR] = useState(dataPoints)
   const [fproducerOMR, setfProducerOMR] = useState(dataPoints)
@@ -30,7 +27,6 @@ const OverallMetrics: React.FC = () => {
   const [offlineBrokers, setOfflineBrokers] = useState(10)
 
   const [tickCache, setTickCache] = useState<string[]>(['', ''])
-
   const [brokers, setBrokers] = useState(['kafka-broker-1:9092'])
 
   useEffect(() => {
@@ -61,20 +57,14 @@ const OverallMetrics: React.FC = () => {
         .then(async (data) => await data.json())
         .then((parsed) => {
           // Destructure the fetched data
-          // Messages In
-          // const messagesTM = parsed[0].value.Count; // Total messages
           const messagesOMR = parsed[0].value.OneMinuteRate // Messages one minute rate
-          // Producer Requests
-          // const producerTR = parsed[1].value.Count; // Total requests
+
           const producerOMR = parsed[1].value.OneMinuteRate // Requests one minute rate
-          // Failed Producer Requests
-          // const fproducerTR = parsed[2].value.Count; // Total failed requests
+
           const fproducerOMR = parsed[2].value.OneMinuteRate // Failed requests one minute rate
-          // Consumer Requests
-          // const consumerTR = parsed[3].value.Count; // Total requests
+
           const consumerOMR = parsed[3].value.OneMinuteRate // Request one minute rate
-          // Failed Consumer Requests
-          // const fconsumerTR = parsed[4].value.Count; // Total failed requests
+
           const fconsumerOMR = parsed[4].value.OneMinuteRate // Failed request one minute rate
           // Total topics
           const totalTopics = parsed[5].value.Value
@@ -183,8 +173,6 @@ const OverallMetrics: React.FC = () => {
   </div>)
   } else {
     return (
-    // need to change css to dynamically adjust min/max width
-    // also needs to dynamically update producer drop down options upon change of cluster address
     <div className="mx-10 my-5">
 
     <h1 className="text-center text-3xl md:text-4xl font-light">Dashboard</h1>
