@@ -11,13 +11,9 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
 
   const [producerName, setProducerName] = useState('')
   const [messagesPerSecond, setMessagesPerSecond] = useState('')
+  // This whill be dynamic in a future release
+  const clientId = 'kafkajs-producer-1'
 
-  // Currently using default values for testing, need dynamic values
-  // const [brokers, setBrokers] = useState(['localhost:9092'])
-  // const [clientId, setClientId] = useState('kafkajs-producer1')
-  // Change these from hardcoded values to useState when adding feature to choose cluster connection
-  // const brokers = ['localhost:9092']
-  const clientId = 'kafkajs-producer1'
   const handleProducerNameInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setProducerName(e.target.value)
   }
@@ -111,9 +107,9 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
     fetch('/api/producers')
       .then(async (data) => await data.json())
       .then((parsed) => {
-        const newProducerList = parsed.producerList.map((prodName: string) => {
+        const newProducerList = parsed.producerList.map((prodName: string, idx: number) => {
           return (
-          <option key={`prodlist${Date.now()}`}>{prodName}</option>
+          <option key={`prodlist${idx}${Math.random()}`}>{prodName}</option>
           )
         })
         setProducersList(newProducerList.length > 0 ? newProducerList : <option disabled>No producers running</option>)
@@ -124,7 +120,7 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
 
   return (
     <section className="flex flex-col justify-center items-center">
-      <p className="text-2xl mb-7">Producer Testing</p>
+      <h2 className="text-2xl mb-7 font-extralight">Producer Testing</h2>
 
       <div className="flex flex-col md:flex-wrap md:flex-row xl:flex-nowrap xl:flex-row xl:justify-center items-center w-full md:max-w-[800px]">
 
@@ -149,8 +145,8 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
           onChange={handleProducerSelect}
           className="select select-bordered w-[200px] md:w-[276px] m-2"
         >
-        <option value="DEFAULT" disabled>Select a producer:</option>
-        {producersList}
+          <option value="DEFAULT" disabled>Select a producer:</option>
+          {producersList}
         </select>
 
         <button
@@ -163,7 +159,7 @@ const ProducerTesting: React.FC<ProducerTestingProps> = ({ brokers }) => {
         <div className="flex flex-col md:flex-row justify-center items-center max-w-[800px]">
           <button
             onClick={handleStopButtonClick}
-            className="btn bg-gray-600 hover:bg-red-800 text-white m-2 w-[200px]"
+            className="btn m-2 w-[200px] btn-outline"
           >
             Stop Producer
           </button>

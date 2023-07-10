@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server'
 import NewConsumer from '../KafkaJS/consumer'
 const consumer = NewConsumer()
 
-// routes tested through Postman
 export async function POST (req: Request, res: Response): Promise<NextResponse> {
   console.log('Hit consumer POST route')
   const data = await req.json()

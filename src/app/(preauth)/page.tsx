@@ -2,12 +2,19 @@
 
 import Image from 'next/image'
 import logo from 'src/assets/kafkaPRAAG-logo-transparent.png'
+import GIF from 'src/assets/landing.gif'
 
 import { getProviders, signIn } from 'next-auth/react'
 
 const Landing: React.FC = () => {
   return (
     <main className="hero min-h-screen">
+    <Image
+    style={{ opacity: '35%' }}
+  src={GIF}
+  alt="kafkaPRAAG background"
+  fill={true}
+  objectFit="cover"></Image>
       <div className="hero-content text-center">
         <div className="max-w-lg flex flex-col justify-center items-center">
           <div className="font-title font-semibold text-primary inline-flex text-6xl transition-all duration-200 md:text-8xl text-center">
